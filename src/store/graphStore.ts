@@ -8,6 +8,7 @@ import type {
   GalaxyKind,
 } from "../types/graph";
 import { createSeedGraph } from "../data/seedGraph";
+import { computeLayout } from "../utils/graphLayout";
 import {
   putGalaxy,
   saveGraphById,
@@ -136,8 +137,14 @@ export const useGraphStore = create<GraphState>((set, get) => ({
 
   resetToSeed: () => {
     const fresh = createSeedGraph();
+    // 用与 Re-layout 相同的力导布局摆放,保证 demo 一加载就是舒展、不重叠的尺度
+    const positions = computeLayout(fresh.nodes, fresh.edges);
+    const nodes = fresh.nodes.map((n) => {
+      const p = positions.get(n.id);
+      return p ? { ...n, x: p[0], y: p[1], z: p[2] } : n;
+    });
     set({
-      nodes: fresh.nodes,
+      nodes,
       edges: fresh.edges,
       selectedNodeId: null,
       searchTerm: "",
