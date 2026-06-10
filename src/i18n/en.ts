@@ -11,6 +11,8 @@ export const en = {
   // ControlPanel
   "control.newNode": "+ New Node",
   "control.relayout": "Re-layout",
+  "control.collapse": "Collapse panel",
+  "control.expand": "Open panel",
   "control.footer": "{count} stars visible · drag to rotate · scroll to zoom · click to inspect",
   // SearchPanel
   "search.label": "Search memories",
