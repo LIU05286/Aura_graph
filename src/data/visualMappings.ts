@@ -17,16 +17,16 @@ export const TYPE_COLOR: Record<MemoryNodeType, string> = {
   concept: "#22D3EE",
 };
 
-/** 类型 → 中文标签 */
+/** Type → label */
 export const TYPE_LABEL: Record<MemoryNodeType, string> = {
-  idea: "想法",
-  note: "笔记",
-  person: "人物",
-  project: "项目",
-  book: "书籍",
-  course: "课程",
-  event: "事件",
-  concept: "概念",
+  idea: "Idea",
+  note: "Note",
+  person: "Person",
+  project: "Project",
+  book: "Book",
+  course: "Course",
+  event: "Event",
+  concept: "Concept",
 };
 
 /** importance(1..5) → 核心球半径(纯函数,便于测试) */
@@ -40,11 +40,11 @@ export const EDGE_COLOR_DIM = "#33415a";
 export const EDGE_COLOR_HOT = "#9fd0ff";
 
 export const EDGE_TYPE_LABEL: Record<MemoryEdgeType, string> = {
-  related: "相关",
-  causes: "导致",
-  supports: "支持",
-  contradicts: "矛盾",
-  source: "来源",
-  similar: "相似",
-  extends: "延伸",
+  related: "Related",
+  causes: "Causes",
+  supports: "Supports",
+  contradicts: "Contradicts",
+  source: "Source",
+  similar: "Similar",
+  extends: "Extends",
 };

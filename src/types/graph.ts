@@ -72,3 +72,17 @@ export const NODE_TYPES: MemoryNodeType[] = [
   "event",
   "concept",
 ];
+
+
+/** 星系类型(呼应"思维星系/事件星系"等) */
+export type GalaxyKind = "thought" | "event" | "custom";
+
+/** 一个星系:一张独立的图谱及其元信息 */
+export interface Galaxy {
+  id: string;
+  name: string;
+  kind: GalaxyKind;
+  accentColor: string; // 主题色(十六进制),用于 UI 点缀
+  createdAt: string;
+  updatedAt: string;
+}

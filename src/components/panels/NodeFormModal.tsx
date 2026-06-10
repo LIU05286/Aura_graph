@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useGraphStore } from "../../store/graphStore";
 import { NODE_TYPES, type MemoryNodeType, type MemoryNode } from "../../types/graph";
 import { TYPE_LABEL } from "../../data/visualMappings";
+import { t } from "../../i18n";
 
 function randomPosition(): { x: number; y: number; z: number } {
   const r = 4 + Math.random() * 4;
@@ -63,7 +64,7 @@ export default function NodeFormModal() {
   const handleSave = () => {
     const trimmedTitle = title.trim();
     if (!trimmedTitle) {
-      window.alert("标题不能为空");
+      window.alert(t("form.titleRequired"));
       return;
     }
 
@@ -110,10 +111,10 @@ export default function NodeFormModal() {
   return (
     <div className="ag-modal-overlay" onClick={handleOverlayClick}>
       <div className="ag-modal">
-        <div className="ag-modal-title">{editorMode === "create" ? "新建节点" : "编辑节点"}</div>
+        <div className="ag-modal-title">{editorMode === "create" ? t("form.createTitle") : t("form.editTitle")}</div>
 
         <label className="ag-modal-field">
-          <span className="ag-eyebrow">标题</span>
+          <span className="ag-eyebrow">{t("form.title")}</span>
           <input
             className="ag-input"
             value={title}
@@ -122,7 +123,7 @@ export default function NodeFormModal() {
         </label>
 
         <label className="ag-modal-field">
-          <span className="ag-eyebrow">类型</span>
+          <span className="ag-eyebrow">{t("form.type")}</span>
           <select
             className="ag-select"
             value={type}
@@ -137,7 +138,7 @@ export default function NodeFormModal() {
         </label>
 
         <label className="ag-modal-field">
-          <span className="ag-eyebrow">重要度</span>
+          <span className="ag-eyebrow">{t("form.importance")}</span>
           <select
             className="ag-select"
             value={importance}
@@ -152,17 +153,17 @@ export default function NodeFormModal() {
         </label>
 
         <label className="ag-modal-field">
-          <span className="ag-eyebrow">标签</span>
+          <span className="ag-eyebrow">{t("form.tags")}</span>
           <input
             className="ag-input"
-            placeholder="用逗号分隔(中英文逗号都可以),如 数学, 读书"
+            placeholder={t("form.tagsPlaceholder")}
             value={tagsText}
             onChange={(e) => setTagsText(e.target.value)}
           />
         </label>
 
         <label className="ag-modal-field">
-          <span className="ag-eyebrow">内容</span>
+          <span className="ag-eyebrow">{t("form.content")}</span>
           <textarea
             className="ag-textarea"
             value={content}
@@ -172,10 +173,10 @@ export default function NodeFormModal() {
 
         <div className="ag-modal-actions">
           <button type="button" className="ag-chip" onClick={closeEditor}>
-            取消
+            {t("form.cancel")}
           </button>
           <button type="button" className="ag-chip" onClick={handleSave}>
-            保存
+            {t("form.save")}
           </button>
         </div>
       </div>

@@ -6,6 +6,7 @@ import type { MemoryEdgeType, MemoryEdge } from "../../types/graph";
 import TypeDot from "../ui/TypeDot";
 import Stars from "../ui/Stars";
 import Chip from "../ui/Chip";
+import { t } from "../../i18n";
 
 /** 右侧详情:选中节点的内容、星级、星座、关联节点(可点击跳转) */
 export default function DetailPanel() {
@@ -43,7 +44,7 @@ export default function DetailPanel() {
 
   return (
     <div className="ag-panel ag-right">
-      <button className="ag-close" onClick={() => selectNode(null)} aria-label="关闭详情">
+      <button className="ag-close" onClick={() => selectNode(null)} aria-label={t("detail.close")}>
         ×
       </button>
 
@@ -52,7 +53,7 @@ export default function DetailPanel() {
         {TYPE_LABEL[node.type]}
       </div>
       <button type="button" className="ag-chip ag-detail-edit" onClick={() => openEditNode(node.id)}>
-        编辑
+        {t("detail.edit")}
       </button>
       <h2 className="ag-detail-title">{node.title}</h2>
       <Stars value={node.importance} />
@@ -60,7 +61,7 @@ export default function DetailPanel() {
 
       {node.tags.length > 0 && (
         <div className="ag-detail-block">
-          <div className="ag-eyebrow">星座</div>
+          <div className="ag-eyebrow">{t("detail.tags")}</div>
           <div className="ag-chips">
             {node.tags.map((t) => (
               <Chip key={t} tag isStatic>
@@ -73,7 +74,7 @@ export default function DetailPanel() {
 
       {connected.length > 0 && (
         <div className="ag-detail-block">
-          <div className="ag-eyebrow">关联的星 ({connected.length})</div>
+          <div className="ag-eyebrow">{t("detail.connected", { count: connected.length })}</div>
           <div className="ag-connected">
             {connected.map((n) => (
               <button key={n.id} className="ag-result" onClick={() => pick(n.id)}>
@@ -86,14 +87,14 @@ export default function DetailPanel() {
       )}
 
       <div className="ag-detail-block">
-        <div className="ag-eyebrow">关系</div>
+        <div className="ag-eyebrow">{t("detail.relations")}</div>
         <div className="ag-relations-form">
           <select
             className="ag-select"
             value={targetId}
             onChange={(e) => setTargetId(e.target.value)}
           >
-            <option value="">选择目标节点…</option>
+            <option value="">{t("detail.selectTarget")}</option>
             {nodes
               .filter((n) => n.id !== node.id)
               .map((n) => (
@@ -120,7 +121,7 @@ export default function DetailPanel() {
             className="ag-chip"
             onClick={() => {
               if (!targetId) {
-                window.alert("请选择目标节点");
+                window.alert(t("detail.alertSelectTarget"));
                 return;
               }
               const edge: MemoryEdge = {
@@ -135,7 +136,7 @@ export default function DetailPanel() {
               setTargetId("");
             }}
           >
-            添加关系
+            {t("detail.addRelation")}
           </button>
         </div>
 
@@ -156,7 +157,7 @@ export default function DetailPanel() {
                   type="button"
                   className="ag-relation-remove"
                   onClick={() => deleteEdge(edge.id)}
-                  aria-label="删除关系"
+                  aria-label={t("detail.deleteRelation")}
                 >
                   ×
                 </button>
@@ -172,14 +173,14 @@ export default function DetailPanel() {
         onClick={() => {
           if (
             window.confirm(
-              `确定删除「${node.title}」?此操作会同时删除它的所有连线。`
+              t("detail.confirmDeleteNode", { title: node.title })
             )
           ) {
             deleteNode(node.id);
           }
         }}
       >
-        删除节点
+        {t("detail.deleteNode")}
       </button>
     </div>
   );

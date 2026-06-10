@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useGraphStore } from "../../store/graphStore";
 import { getVisibleNodeIds } from "../../utils/graphFilter";
 import { computeLayout } from "../../utils/graphLayout";
+import { t } from "../../i18n";
 import SearchPanel from "./SearchPanel";
 import TypeFilterPanel from "./TypeFilterPanel";
 import TagFilterPanel from "./TagFilterPanel";
@@ -38,10 +39,10 @@ export default function ControlPanel() {
 
       <div className="ag-section">
         <button type="button" className="ag-chip ag-chip-primary" onClick={openCreateNode}>
-          + 新建节点
+          {t("control.newNode")}
         </button>
         <button type="button" className="ag-chip ag-chip-primary" onClick={handleRelayout}>
-          重新布局
+          {t("control.relayout")}
         </button>
       </div>
 
@@ -51,7 +52,7 @@ export default function ControlPanel() {
       <GraphIOPanel />
 
       <div className="ag-footer">
-        当前可见 {visibleCount} 颗星 · 拖拽旋转 · 滚轮缩放 · 点击查看
+        {t("control.footer", { count: visibleCount })}
       </div>
     </div>
   );

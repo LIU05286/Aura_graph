@@ -3,6 +3,7 @@ import { useGraphStore } from "../../store/graphStore";
 import { searchNodes } from "../../utils/graphSearch";
 import { getVisibleNodeIds } from "../../utils/graphFilter";
 import { TYPE_LABEL } from "../../data/visualMappings";
+import { t } from "../../i18n";
 import TypeDot from "../ui/TypeDot";
 
 /** 搜索框 + 结果列表;点击结果会选中并请求相机飞向 */
@@ -32,17 +33,17 @@ export default function SearchPanel() {
 
   return (
     <div className="ag-section">
-      <label className="ag-eyebrow">搜索记忆</label>
+      <label className="ag-eyebrow">{t("search.label")}</label>
       <input
         className="ag-input"
-        placeholder="按标题或内容搜索…"
+        placeholder={t("search.placeholder")}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       {searchTerm.trim() !== "" && (
         <div className="ag-results">
           {results.length === 0 && (
-            <div className="ag-result-empty">没有匹配的星星</div>
+            <div className="ag-result-empty">{t("search.empty")}</div>
           )}
           {results.map((n) => (
             <button key={n.id} className="ag-result" onClick={() => pick(n.id)}>

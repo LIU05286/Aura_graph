@@ -1,5 +1,6 @@
 import { useRef, type ChangeEvent } from "react";
 import { useGraphStore } from "../../store/graphStore";
+import { t } from "../../i18n";
 import { exportGraphToFile, parseGraphFromText } from "../../utils/graphIO";
 
 export default function GraphIOPanel() {
@@ -28,7 +29,7 @@ export default function GraphIOPanel() {
         const graph = parseGraphFromText(text);
         replaceGraph(graph);
       } catch (error) {
-        const message = error instanceof Error ? error.message : "导入失败";
+        const message = error instanceof Error ? error.message : t("io.importFailed");
         console.error(error);
         window.alert(message);
       } finally {
@@ -45,23 +46,23 @@ export default function GraphIOPanel() {
   };
 
   const onReset = () => {
-    if (window.confirm("确定要重置为示例数据吗？")) {
+    if (window.confirm(t("io.confirmReset"))) {
       resetToSeed();
     }
   };
 
   return (
     <div className="ag-section">
-      <label className="ag-eyebrow">数据</label>
+      <label className="ag-eyebrow">{t("io.dataLabel")}</label>
       <div className="ag-chips">
         <button type="button" className="ag-chip" onClick={onExport}>
-          导出 JSON
+          {t("io.exportJson")}
         </button>
         <button type="button" className="ag-chip" onClick={onPickFile}>
-          导入 JSON
+          {t("io.importJson")}
         </button>
         <button type="button" className="ag-chip" onClick={onReset}>
-          重置为示例
+          {t("io.reset")}
         </button>
       </div>
       <input
