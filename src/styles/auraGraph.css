@@ -1,0 +1,430 @@
+/* ==========================================================================
+ * Aura Graph 视觉样式(从单文件原型迁移,类名保持一致以保证效果不变)
+ * ========================================================================== */
+
+.ag-root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: #e6ecf7;
+  background: radial-gradient(
+      1200px 800px at 70% 20%,
+      rgba(60, 90, 170, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 700px at 20% 80%,
+      rgba(120, 60, 180, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(1400px 1000px at 50% 50%, #0a0f1f 0%, #060814 55%, #03040a 100%);
+  user-select: none;
+}
+
+/* —— 3D 画布与标签叠层 —— */
+.ag-canvas-wrap {
+  position: absolute;
+  inset: 0;
+}
+.ag-canvas {
+  position: absolute;
+  inset: 0;
+}
+.ag-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ag-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.9), 0 0 3px rgba(0, 0, 0, 0.9);
+  transition: color 0.2s, font-size 0.2s;
+}
+
+/* —— 玻璃拟态面板 —— */
+.ag-panel {
+  position: absolute;
+  z-index: 10;
+  background: rgba(10, 15, 30, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(150, 180, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+.ag-left {
+  left: 18px;
+  top: 18px;
+  width: 268px;
+  padding: 18px;
+}
+.ag-right {
+  right: 18px;
+  top: 18px;
+  width: 300px;
+  padding: 20px;
+  max-height: calc(100% - 36px);
+  overflow: auto;
+  animation: agSlide 0.25s ease;
+}
+@keyframes agSlide {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* —— 品牌区 —— */
+.ag-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 18px;
+}
+.ag-brand-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #cfe3ff, #4f9dff 45%, #2a4cff 80%);
+  box-shadow: 0 0 18px rgba(79, 157, 255, 0.8);
+}
+.ag-brand-name {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.ag-brand-sub {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: #7f93b8;
+  text-transform: uppercase;
+}
+
+/* —— 区块与表单 —— */
+.ag-section {
+  margin-bottom: 18px;
+}
+.ag-eyebrow {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7f93b8;
+  margin-bottom: 9px;
+}
+.ag-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(150, 180, 255, 0.16);
+  border-radius: 10px;
+  color: #e6ecf7;
+  font-size: 13px;
+  outline: none;
+}
+.ag-input::placeholder {
+  color: #64769a;
+}
+.ag-input:focus {
+  border-color: rgba(79, 157, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(79, 157, 255, 0.12);
+}
+
+/* —— 搜索结果 —— */
+.ag-results {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ag-result-empty {
+  font-size: 12px;
+  color: #64769a;
+  padding: 6px 4px;
+}
+.ag-result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 7px 8px;
+  border-radius: 8px;
+  color: #cdd8ee;
+  font-size: 13px;
+  cursor: pointer;
+}
+.ag-result:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.ag-result-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ag-result-type {
+  font-size: 10px;
+  color: #7f93b8;
+}
+
+/* —— 小圆点 —— */
+.ag-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  display: inline-block;
+  box-shadow: 0 0 6px currentColor;
+}
+
+/* —— 胶囊筛选 —— */
+.ag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.ag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(150, 180, 255, 0.14);
+  color: #8294b8;
+  font-size: 12px;
+  transition: all 0.15s;
+}
+.ag-chip:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+.ag-chip:focus-visible {
+  outline: 2px solid rgba(79, 157, 255, 0.75);
+  outline-offset: 2px;
+}
+.ag-chip-primary {
+  width: 100%;
+  justify-content: center;
+  color: #d7e3f7;
+}
+.ag-chip.on.tag {
+  background: rgba(79, 157, 255, 0.16);
+  border-color: rgba(79, 157, 255, 0.5);
+  color: #cfe3ff;
+}
+.ag-chip.tag.static {
+  cursor: default;
+}
+.ag-file-input {
+  display: none;
+}
+
+.ag-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.ag-modal {
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(10, 15, 30, 0.86);
+  border: 1px solid rgba(150, 180, 255, 0.18);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+}
+.ag-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.ag-modal-field {
+  display: block;
+  margin-bottom: 12px;
+}
+.ag-select,
+.ag-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(150, 180, 255, 0.16);
+  border-radius: 10px;
+  color: #e6ecf7;
+  font-size: 13px;
+  outline: none;
+}
+.ag-select:focus,
+.ag-textarea:focus {
+  border-color: rgba(79, 157, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(79, 157, 255, 0.12);
+}
+.ag-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+.ag-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+.ag-detail-edit {
+  position: absolute;
+  top: 14px;
+  right: 52px;
+}
+.ag-danger {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(248, 113, 113, 0.55);
+  background: transparent;
+  color: #f87171;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.ag-danger:hover {
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.8);
+  color: #ff9b9b;
+}
+.ag-danger:focus-visible {
+  outline: 2px solid rgba(248, 113, 113, 0.8);
+  outline-offset: 2px;
+}
+.ag-relations-form {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.ag-relation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ag-relation-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ag-relation-item {
+  flex: 1;
+}
+.ag-relation-remove {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  background: transparent;
+  color: #f87171;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+.ag-relation-remove:hover {
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.8);
+}
+.ag-relation-remove:focus-visible {
+  outline: 2px solid rgba(248, 113, 113, 0.8);
+  outline-offset: 2px;
+}
+
+.ag-footer {
+  font-size: 10.5px;
+  color: #5e6f93;
+  line-height: 1.7;
+  margin-top: 4px;
+}
+
+/* —— 详情面板 —— */
+.ag-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #8294b8;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.ag-close:hover {
+  color: #fff;
+}
+.ag-detail-type {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #9fb0d4;
+  text-transform: uppercase;
+}
+.ag-detail-title {
+  font-size: 21px;
+  font-weight: 700;
+  margin: 8px 0 6px;
+  line-height: 1.25;
+}
+.ag-stars {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #3a465f;
+  margin-bottom: 12px;
+}
+.ag-stars .on {
+  color: #facc15;
+  text-shadow: 0 0 8px rgba(250, 204, 21, 0.6);
+}
+.ag-detail-content {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #c3cee4;
+  margin: 0 0 18px;
+}
+.ag-detail-block {
+  margin-bottom: 16px;
+}
+.ag-connected {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* —— 移动端 —— */
+@media (max-width: 680px) {
+  .ag-left {
+    width: calc(100% - 36px);
+  }
+  .ag-right {
+    width: calc(100% - 36px);
+    top: auto;
+    bottom: 18px;
+    max-height: 46%;
+  }
+}

@@ -1,0 +1,20 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #03040a;
+  color: #e6ecf7;
+  font-family: ui-sans-serif, "Inter", system-ui, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  overflow: hidden;
+}

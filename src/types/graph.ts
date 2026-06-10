@@ -1,0 +1,74 @@
+/**
+ * 核心数据模型 —— Aura Graph 的"记忆星图"领域类型。
+ * 这是整个工程的单一类型来源,store / utils / 渲染层都从这里取类型。
+ */
+
+export type MemoryNodeType =
+  | "idea"
+  | "note"
+  | "person"
+  | "project"
+  | "book"
+  | "course"
+  | "event"
+  | "concept";
+
+export type MemoryEdgeType =
+  | "related"
+  | "causes"
+  | "supports"
+  | "contradicts"
+  | "source"
+  | "similar"
+  | "extends";
+
+/** 重要度 / 关系强度:1(最弱)~ 5(最强) */
+export type Intensity = 1 | 2 | 3 | 4 | 5;
+
+/** 一颗"星":一条记忆 / 笔记 / 概念 / 人物 …… */
+export interface MemoryNode {
+  id: string;
+  title: string;
+  content: string;
+  type: MemoryNodeType;
+  tags: string[];
+  importance: Intensity;
+  createdAt: string; // ISO 字符串
+  updatedAt: string; // ISO 字符串
+  /** 3D 坐标(由 seed 或未来的布局算法写入) */
+  x: number;
+  y: number;
+  z: number;
+  /** 可选视觉覆盖:不填则按 type 自动取色 / 按 importance 自动取尺寸 */
+  color?: string;
+  size?: number;
+}
+
+/** 两颗星之间的连线:一段关系 */
+export interface MemoryEdge {
+  id: string;
+  source: string; // MemoryNode.id
+  target: string; // MemoryNode.id
+  type: MemoryEdgeType;
+  strength: Intensity;
+  label?: string;
+  createdAt: string;
+}
+
+/** 完整图谱:也是导入 / 导出 JSON 的结构 */
+export interface AuraGraph {
+  nodes: MemoryNode[];
+  edges: MemoryEdge[];
+}
+
+/** 所有节点类型(用于筛选面板等的稳定展示顺序) */
+export const NODE_TYPES: MemoryNodeType[] = [
+  "idea",
+  "note",
+  "person",
+  "project",
+  "book",
+  "course",
+  "event",
+  "concept",
+];
