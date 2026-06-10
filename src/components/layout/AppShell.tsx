@@ -5,11 +5,12 @@ import { usePersistence } from "../../hooks/usePersistence";
 import GraphCanvas from "../graph/GraphCanvas";
 import ControlPanel from "../panels/ControlPanel";
 import DetailPanel from "../panels/DetailPanel";
-import EmptyState from "../panels/EmptyState";
 import NodeFormModal from "../panels/NodeFormModal";
 import QuickCapture from "../panels/QuickCapture";
+import EmptyState from "../panels/EmptyState";
+import AiPing from "../AiPing";
 
-/** 应用骨架:3D 画布 + 空状态卡 + 顶部快速记录 + 左右面板 + 弹窗 */
+/** 应用骨架:3D 画布 + 空状态卡 + 顶部快速记录 + 左右面板 + 弹窗(+ 临时 AI 自测) */
 export default function AppShell() {
   usePersistence();
 
@@ -24,12 +25,10 @@ export default function AppShell() {
     [nodes, hiddenTypes, activeTags]
   );
 
-  // 选中的节点被筛选隐藏时,自动取消选中
   useEffect(() => {
     if (selectedNodeId && !visibleIds.has(selectedNodeId)) selectNode(null);
   }, [visibleIds, selectedNodeId, selectNode]);
 
-  // Esc 取消选中
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") selectNode(null);
@@ -46,6 +45,7 @@ export default function AppShell() {
       <ControlPanel />
       <DetailPanel />
       <NodeFormModal />
+      <AiPing />
     </div>
   );
 }
