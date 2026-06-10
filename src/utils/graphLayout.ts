@@ -41,22 +41,36 @@ export function computeLayout(
   }));
 
   const sim = forceSimulation<LayoutNode>(simNodes, 3)
-    .force("charge", forceManyBody().strength(-30))
+    .force("charge", forceManyBody().strength(-12))
     .force(
       "link",
       forceLink(simLinks)
         .id((d: LayoutNode) => d.id)
-        .distance(6)
+        .distance(3)
         .strength(0.4)
     )
-    .force("x", forceX(0).strength(0.1))
-    .force("y", forceY(0).strength(0.1))
-    .force("z", forceZ(0).strength(0.1))
+    .force("x", forceX(0).strength(0.18))
+    .force("y", forceY(0).strength(0.18))
+    .force("z", forceZ(0).strength(0.18))
     .force("collide", forceCollide(1.2))
     .stop();
 
   // 同步迭代到收敛(本轮不做动画,直接算最终坐标)
   for (let i = 0; i < 300; i++) sim.tick();
+
+  // 归一化:把整体尺度缩放到与初始 seed 接近(最大半径约 9)
+  let maxR = 0;
+  for (const n of simNodes) {
+    const r = Math.sqrt((n.x ?? 0) ** 2 + (n.y ?? 0) ** 2 + (n.z ?? 0) ** 2);
+    if (r > maxR) maxR = r;
+  }
+  const TARGET_MAX_R=20;
+  const scale = maxR > 0.001 ? TARGET_MAX_R / maxR : 1;
+  for (const n of simNodes) {
+    n.x = (n.x ?? 0) * scale;
+    n.y = (n.y ?? 0) * scale;
+    n.z = (n.z ?? 0) * scale;
+  }
 
   const positions = new Map<string, Vec3>();
   for (const n of simNodes) {

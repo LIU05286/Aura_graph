@@ -24,30 +24,29 @@ export default function CameraRig({
   const flying = useRef(false);
   const flyTarget = useRef(new THREE.Vector3());
   const offsetVec = useRef(new THREE.Vector3());
+  const userInteracting = useRef(false);
   const lastInteract = useRef(performance.now());
-  const prevCamPos = useRef(new THREE.Vector3());
 
   useEffect(() => {
     const controls = controlsRef.current;
     if (!controls) return;
 
     const onStart = () => {
-      lastInteract.current = performance.now();
+      userInteracting.current = true;
       flying.current = false;
     };
 
-    const onChange = () => {
+    const onEnd = () => {
+      userInteracting.current = false;
       lastInteract.current = performance.now();
     };
 
     controls.addEventListener("start", onStart);
-    controls.addEventListener("change", onChange);
-    controls.addEventListener("end", onChange);
+    controls.addEventListener("end", onEnd);
 
     return () => {
       controls.removeEventListener("start", onStart);
-      controls.removeEventListener("change", onChange);
-      controls.removeEventListener("end", onChange);
+      controls.removeEventListener("end", onEnd);
     };
   }, [controlsRef]);
 
@@ -66,12 +65,6 @@ export default function CameraRig({
       }
     }
 
-    // 2) 检测用户手动交互(相机位置被 OrbitControls 改变):打断飞行 + 重置空闲计时
-    if (!prevCamPos.current.equals(camera.position) && !flying.current) {
-      lastInteract.current = performance.now();
-    }
-    prevCamPos.current.copy(camera.position);
-
     // 3) 飞向动画:平滑把 controls.target 移到目标,并把相机拉近
     if (flying.current) {
       controls.target.lerp(flyTarget.current, 0.08);
@@ -87,14 +80,15 @@ export default function CameraRig({
       if (controls.target.distanceTo(flyTarget.current) < 0.05) {
         flying.current = false;
       }
+      controls.update();
     }
 
     // 4) 空闲自转:绕 Y 轴小角度旋转相机位置(不依赖 controls 内部方位角)
     const idle = performance.now() - lastInteract.current > 2000;
-    if (idle && !flying.current) {
+    if (idle && !flying.current && !userInteracting.current) {
       const offset = offsetVec.current;
       offset.subVectors(camera.position, controls.target); // 相机相对 target 的偏移
-      const angle = 0.006; // 每帧旋转角度(弧度),越大越快
+      const angle = 0.002; // 每帧旋转角度(弧度),越大越快
       const cos = Math.cos(angle);
       const sin = Math.sin(angle);
       const x = offset.x;
@@ -105,7 +99,9 @@ export default function CameraRig({
       camera.lookAt(controls.target);
     }
 
-    controls.update();
+    if (!flying.current && !idle) {
+      controls.update();
+    }
   });
 
   return null;

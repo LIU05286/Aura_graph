@@ -30,10 +30,10 @@ export const TYPE_LABEL: Record<MemoryNodeType, string> = {
 };
 
 /** importance(1..5) → 核心球半径(纯函数,便于测试) */
-export const importanceToRadius = (i: number): number => 0.18 + i * 0.07;
+export const importanceToRadius = (i: number): number => 0.12 + i * 0.16;
 
 /** importance(1..5) → 辉光 Sprite 尺寸 */
-export const importanceToGlow = (i: number): number => 1.1 + i * 0.55;
+export const importanceToGlow = (i: number): number => 0.8 + i * 0.9;
 
 /** 边的配色:普通 / 高亮(连接到选中节点) */
 export const EDGE_COLOR_DIM = "#33415a";
