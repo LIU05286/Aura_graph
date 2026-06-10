@@ -14,6 +14,15 @@ export const en = {
   "empty.title": "Your universe is empty",
   "empty.hint": "Capture your first thought above — or explore the demo to see what's possible.",
   "empty.loadDemo": "Load demo",
+  // AI tags (P4.2)
+  "ai.suggestTags": "✦ Suggest tags (AI)",
+  "ai.tagsNone": "No new tags suggested",
+  // AI relations (P4.1b)
+  "ai.suggest": "✦ Suggest relations (AI)",
+  "ai.suggesting": "Thinking…",
+  "ai.add": "Add",
+  "ai.none": "No new suggestions",
+  "ai.noCandidates": "Nothing left to connect in this galaxy.",
   // ControlPanel
   "control.newNode": "+ New Node",
   "control.relayout": "Re-layout",

@@ -7,6 +7,8 @@ import TypeDot from "../ui/TypeDot";
 import Stars from "../ui/Stars";
 import Chip from "../ui/Chip";
 import { t } from "../../i18n";
+import AiSuggestRelations from "./AiSuggestRelations";
+import AiSuggestTags from "./AiSuggestTags";
 
 /** 右侧详情:选中节点的内容、星级、星座、关联节点(可点击跳转) */
 export default function DetailPanel() {
@@ -59,18 +61,19 @@ export default function DetailPanel() {
       <Stars value={node.importance} />
       <p className="ag-detail-content">{node.content}</p>
 
-      {node.tags.length > 0 && (
-        <div className="ag-detail-block">
-          <div className="ag-eyebrow">{t("detail.tags")}</div>
+      <div className="ag-detail-block">
+        <div className="ag-eyebrow">{t("detail.tags")}</div>
+        {node.tags.length > 0 && (
           <div className="ag-chips">
-            {node.tags.map((t) => (
-              <Chip key={t} tag isStatic>
-                #{t}
+            {node.tags.map((tag) => (
+              <Chip key={tag} tag isStatic>
+                #{tag}
               </Chip>
             ))}
           </div>
-        </div>
-      )}
+        )}
+        <AiSuggestTags node={node} />
+      </div>
 
       {connected.length > 0 && (
         <div className="ag-detail-block">
@@ -165,6 +168,8 @@ export default function DetailPanel() {
             );
           })}
         </div>
+
+        <AiSuggestRelations node={node} />
       </div>
 
       <button

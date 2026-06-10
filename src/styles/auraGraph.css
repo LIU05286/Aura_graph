@@ -609,3 +609,89 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+/* —— P4.1b AI 关系建议 —— */
+.ag-ai {
+  margin-top: var(--ag-gap-label);
+}
+.ag-ai-btn {
+  width: 100%;
+  color: var(--ag-accent-bright);
+  border-color: rgb(var(--ag-accent-rgb) / 0.4);
+  background: rgb(var(--ag-accent-rgb) / 0.1);
+}
+.ag-ai-btn:hover:not(:disabled) {
+  background: rgb(var(--ag-accent-rgb) / 0.18);
+}
+.ag-ai-error {
+  margin-top: 8px;
+  font-size: var(--ag-fs-xs);
+  color: var(--ag-danger);
+  line-height: var(--ag-lh-relaxed);
+}
+.ag-ai-empty {
+  margin-top: 8px;
+  font-size: var(--ag-fs-xs);
+  color: var(--ag-text-faint);
+}
+.ag-ai-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ag-ai-item {
+  padding: 10px 12px;
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.14);
+  border-radius: var(--ag-radius);
+  background: rgb(var(--ag-white-rgb) / 0.03);
+}
+.ag-ai-item-main {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.ag-ai-type {
+  flex: 0 0 auto;
+  font-size: var(--ag-fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ag-accent-bright);
+}
+.ag-ai-target {
+  font-size: var(--ag-fs-sm);
+  color: var(--ag-text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ag-ai-reason {
+  margin-top: 4px;
+  font-size: var(--ag-fs-xs);
+  line-height: var(--ag-lh-relaxed);
+  color: var(--ag-text-subtle);
+}
+.ag-ai-add {
+  margin-top: 8px;
+}
+
+/* —— P4.2 AI 标签建议 —— */
+.ag-ai-tags {
+  margin-top: 12px;
+}
+.ag-ai-tag-row {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ag-ai-tag {
+  width: auto;
+  padding: 6px 10px;
+  border-color: rgb(var(--ag-accent-rgb) / 0.3);
+  background: rgb(var(--ag-accent-rgb) / 0.08);
+  color: var(--ag-accent-bright);
+}
+.ag-ai-tag:hover:not(:disabled) {
+  background: rgb(var(--ag-accent-rgb) / 0.16);
+}
