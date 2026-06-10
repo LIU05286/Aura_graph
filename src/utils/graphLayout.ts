@@ -12,10 +12,6 @@ import type { MemoryNode, MemoryEdge } from "../types/graph";
 
 export type Vec3 = [number, number, number];
 
-/** 读取节点的 3D 坐标(渲染层统一从这里取,未来切换布局算法时只改这里) */
-export function getNodePosition(node: MemoryNode): Vec3 {
-  return [node.x, node.y, node.z];
-}
 
 interface LayoutNode extends SimulationNode {
   id: string;
