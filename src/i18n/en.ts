@@ -8,6 +8,12 @@ export const en = {
   "galaxy.promptRename": "Rename this galaxy",
   "galaxy.confirmDelete": "Delete galaxy \"{name}\" and everything in it? This cannot be undone.",
   "galaxy.cannotDeleteLast": "You must keep at least one galaxy.",
+  // QuickCapture
+  "capture.placeholder": "Capture a thought… press Enter",
+  // EmptyState
+  "empty.title": "Your universe is empty",
+  "empty.hint": "Capture your first thought above — or explore the demo to see what's possible.",
+  "empty.loadDemo": "Load demo",
   // ControlPanel
   "control.newNode": "+ New Node",
   "control.relayout": "Re-layout",

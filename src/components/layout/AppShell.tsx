@@ -5,9 +5,11 @@ import { usePersistence } from "../../hooks/usePersistence";
 import GraphCanvas from "../graph/GraphCanvas";
 import ControlPanel from "../panels/ControlPanel";
 import DetailPanel from "../panels/DetailPanel";
+import EmptyState from "../panels/EmptyState";
 import NodeFormModal from "../panels/NodeFormModal";
+import QuickCapture from "../panels/QuickCapture";
 
-/** 应用骨架:组合 3D 画布 + 左侧控制面板 + 右侧详情面板 */
+/** 应用骨架:3D 画布 + 空状态卡 + 顶部快速记录 + 左右面板 + 弹窗 */
 export default function AppShell() {
   usePersistence();
 
@@ -39,6 +41,8 @@ export default function AppShell() {
   return (
     <div className="ag-root">
       <GraphCanvas />
+      <EmptyState />
+      <QuickCapture />
       <ControlPanel />
       <DetailPanel />
       <NodeFormModal />

@@ -535,3 +535,77 @@
   border-color: rgb(var(--ag-border-rgb) / 0.3);
   color: var(--ag-text);
 }
+
+/* —— P3.2 顶部快速记录 —— */
+.ag-capture {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  width: min(440px, calc(100% - 80px));
+}
+.ag-capture-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 16px;
+  background: var(--ag-panel-bg);
+  backdrop-filter: blur(var(--ag-blur));
+  -webkit-backdrop-filter: blur(var(--ag-blur));
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.16);
+  border-radius: var(--ag-radius-pill);
+  box-shadow: 0 12px 40px rgb(var(--ag-shadow-rgb) / 0.45),
+    inset 0 1px 0 rgb(var(--ag-white-rgb) / 0.06);
+  color: var(--ag-text);
+  font-size: var(--ag-fs-sm);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.ag-capture-input::placeholder {
+  color: var(--ag-text-faint);
+}
+.ag-capture-input:focus {
+  border-color: rgb(var(--ag-accent-rgb) / 0.6);
+  box-shadow: 0 0 0 3px rgb(var(--ag-accent-rgb) / 0.12),
+    0 12px 40px rgb(var(--ag-shadow-rgb) / 0.45);
+}
+
+/* —— P3.3 空状态引导卡 —— */
+.ag-empty {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.ag-empty-card {
+  pointer-events: auto;
+  max-width: 360px;
+  padding: 28px 30px;
+  text-align: center;
+  background: var(--ag-panel-bg);
+  backdrop-filter: blur(var(--ag-blur));
+  -webkit-backdrop-filter: blur(var(--ag-blur));
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.16);
+  border-radius: var(--ag-radius-lg);
+  box-shadow: 0 24px 60px rgb(var(--ag-shadow-rgb) / 0.5),
+    inset 0 1px 0 rgb(var(--ag-white-rgb) / 0.06);
+}
+.ag-empty-title {
+  font-size: var(--ag-fs-lg);
+  font-weight: var(--ag-fw-bold);
+  margin-bottom: 8px;
+}
+.ag-empty-hint {
+  margin: 0 0 20px;
+  font-size: var(--ag-fs-sm);
+  line-height: var(--ag-lh-relaxed);
+  color: var(--ag-text-subtle);
+}
+.ag-empty-card .ag-chip-primary {
+  width: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
