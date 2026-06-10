@@ -1,4 +1,13 @@
 export const en = {
+  // GalaxyPanel
+  "galaxy.label": "Galaxies",
+  "galaxy.new": "+ New Galaxy",
+  "galaxy.rename": "Rename",
+  "galaxy.delete": "Delete",
+  "galaxy.promptNewName": "Name your new galaxy",
+  "galaxy.promptRename": "Rename this galaxy",
+  "galaxy.confirmDelete": "Delete galaxy \"{name}\" and everything in it? This cannot be undone.",
+  "galaxy.cannotDeleteLast": "You must keep at least one galaxy.",
   // ControlPanel
   "control.newNode": "+ New Node",
   "control.relayout": "Re-layout",

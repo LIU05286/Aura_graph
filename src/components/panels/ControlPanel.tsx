@@ -7,6 +7,7 @@ import SearchPanel from "./SearchPanel";
 import TypeFilterPanel from "./TypeFilterPanel";
 import TagFilterPanel from "./TagFilterPanel";
 import GraphIOPanel from "./GraphIOPanel";
+import GalaxyPanel from "./GalaxyPanel";
 
 /** 左侧控制面板:品牌 + 搜索 + 类型筛选 + 星座筛选 + 状态行 */
 export default function ControlPanel() {
@@ -36,6 +37,8 @@ export default function ControlPanel() {
           <div className="ag-brand-sub">memory universe</div>
         </div>
       </div>
+
+      <GalaxyPanel />
 
       <div className="ag-section">
         <button type="button" className="ag-chip ag-chip-primary" onClick={openCreateNode}>
