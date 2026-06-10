@@ -36,7 +36,7 @@ export const en = {
   "detail.deleteNode": "Delete node",
   // GraphIOPanel
   "io.importFailed": "Import failed",
-  "io.confirmReset": "Reset to the demo data?",
+  "io.confirmReset": "Load the demo into this galaxy? It replaces the current contents.",
   "io.dataLabel": "Data",
   "io.exportJson": "Export JSON",
   "io.importJson": "Import JSON",

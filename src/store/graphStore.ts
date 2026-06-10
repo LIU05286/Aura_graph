@@ -70,7 +70,7 @@ export interface GraphState {
   setNodePositions: (positions: Map<string, [number, number, number]>) => void;
 }
 
-const initial = createSeedGraph();
+const initial: AuraGraph = { nodes: [], edges: [] };
 
 /** 新星系的点缀色调色板,按现有星系数量轮换取色 */
 const ACCENT_PALETTE = [
