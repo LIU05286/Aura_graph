@@ -9,6 +9,7 @@ import Chip from "../ui/Chip";
 import { t } from "../../i18n";
 import AiSuggestRelations from "./AiSuggestRelations";
 import AiSuggestTags from "./AiSuggestTags";
+import RichText from "../ui/RichText";
 
 /** 右侧详情:选中节点的内容、星级、星座、关联节点(可点击跳转) */
 export default function DetailPanel() {
@@ -59,7 +60,15 @@ export default function DetailPanel() {
       </button>
       <h2 className="ag-detail-title">{node.title}</h2>
       <Stars value={node.importance} />
-      <p className="ag-detail-content">{node.content}</p>
+      <div className="ag-detail-meta">
+        <span>{t("detail.created", { date: new Date(node.createdAt).toLocaleDateString() })}</span>
+        <span>{t("detail.updated", { date: new Date(node.updatedAt).toLocaleDateString() })}</span>
+      </div>
+      {node.content.trim() !== "" && (
+        <div className="ag-detail-content">
+          <RichText text={node.content} />
+        </div>
+      )}
 
       <div className="ag-detail-block">
         <div className="ag-eyebrow">{t("detail.tags")}</div>

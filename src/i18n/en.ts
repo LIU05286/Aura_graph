@@ -61,6 +61,8 @@ export const en = {
   // DetailPanel
   "detail.close": "Close details",
   "detail.edit": "Edit",
+  "detail.created": "Created {date}",
+  "detail.updated": "Updated {date}",
   "detail.tags": "Constellations",
   "detail.connected": "Connected stars ({count})",
   "detail.relations": "Relations",

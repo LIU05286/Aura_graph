@@ -923,3 +923,36 @@
 .ag-timeline-reset {
   margin-top: 8px;
 }
+
+/* —— P5.3 详情可读化 —— */
+.ag-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 8px;
+  font-size: var(--ag-fs-eyebrow);
+  letter-spacing: 0.02em;
+  color: var(--ag-text-faint);
+}
+.ag-rt-p {
+  margin: 0 0 10px;
+}
+.ag-rt-p:last-child {
+  margin-bottom: 0;
+}
+.ag-rt-list {
+  margin: 0 0 10px;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ag-rt-list li {
+  list-style: disc;
+}
+.ag-rt-link {
+  color: var(--ag-accent-bright);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+}
