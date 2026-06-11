@@ -1,4 +1,4 @@
-import type { MemoryNode, MemoryNodeType } from "../types/graph";
+import type { MemoryNode, MemoryNodeType, TimeWindow } from "../types/graph";
 
 /**
  * 计算当前可见的节点 id 集合。
@@ -8,12 +8,19 @@ import type { MemoryNode, MemoryNodeType } from "../types/graph";
 export function getVisibleNodeIds(
   nodes: MemoryNode[],
   hiddenTypes: Set<MemoryNodeType>,
-  activeTags: Set<string>
+  activeTags: Set<string>,
+  timeWindow: TimeWindow | null = null
 ): Set<string> {
   const visible = new Set<string>();
   for (const n of nodes) {
     if (hiddenTypes.has(n.type)) continue;
     if (activeTags.size > 0 && !n.tags.some((t) => activeTags.has(t))) continue;
+    if (timeWindow) {
+      const ts = Date.parse(n.createdAt);
+      if (!Number.isNaN(ts) && (ts < timeWindow.start || ts > timeWindow.end)) {
+        continue;
+      }
+    }
     visible.add(n.id);
   }
   return visible;

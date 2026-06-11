@@ -86,3 +86,9 @@ export interface Galaxy {
   createdAt: string;
   updatedAt: string;
 }
+
+/** 时间轴筛选窗口(P5.2):createdAt 落在 [start, end](毫秒)内的节点才可见 */
+export interface TimeWindow {
+  start: number;
+  end: number;
+}

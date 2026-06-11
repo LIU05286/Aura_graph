@@ -16,12 +16,13 @@ export default function AppShell() {
   const nodes = useGraphStore((s) => s.nodes);
   const hiddenTypes = useGraphStore((s) => s.hiddenTypes);
   const activeTags = useGraphStore((s) => s.activeTags);
+  const timeWindow = useGraphStore((s) => s.timeWindow);
   const selectedNodeId = useGraphStore((s) => s.selectedNodeId);
   const selectNode = useGraphStore((s) => s.selectNode);
 
   const visibleIds = useMemo(
-    () => getVisibleNodeIds(nodes, hiddenTypes, activeTags),
-    [nodes, hiddenTypes, activeTags]
+    () => getVisibleNodeIds(nodes, hiddenTypes, activeTags, timeWindow),
+    [nodes, hiddenTypes, activeTags, timeWindow]
   );
 
   useEffect(() => {

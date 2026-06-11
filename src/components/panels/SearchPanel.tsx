@@ -41,6 +41,7 @@ export default function SearchPanel() {
   const searchTerm = useGraphStore((s) => s.searchTerm);
   const hiddenTypes = useGraphStore((s) => s.hiddenTypes);
   const activeTags = useGraphStore((s) => s.activeTags);
+  const timeWindow = useGraphStore((s) => s.timeWindow);
   const setSearchTerm = useGraphStore((s) => s.setSearchTerm);
   const selectNode = useGraphStore((s) => s.selectNode);
   const requestFocusNode = useGraphStore((s) => s.requestFocusNode);
@@ -51,8 +52,8 @@ export default function SearchPanel() {
   const [semanticResults, setSemanticResults] = useState<Ranked[] | null>(null);
 
   const visibleIds = useMemo(
-    () => getVisibleNodeIds(nodes, hiddenTypes, activeTags),
-    [nodes, hiddenTypes, activeTags]
+    () => getVisibleNodeIds(nodes, hiddenTypes, activeTags, timeWindow),
+    [nodes, hiddenTypes, activeTags, timeWindow]
   );
 
   const textResults = useMemo(() => {

@@ -6,6 +6,7 @@ import type {
   MemoryNodeType,
   Galaxy,
   GalaxyKind,
+  TimeWindow,
 } from "../types/graph";
 import { createSeedGraph } from "../data/seedGraph";
 import { computeLayout } from "../utils/graphLayout";
@@ -33,6 +34,7 @@ export interface GraphState {
   searchTerm: string;
   hiddenTypes: Set<MemoryNodeType>;
   activeTags: Set<string>;
+  timeWindow: TimeWindow | null;
   focusNodeId: string | null;
   focusNonce: number;
   editorMode: "create" | "edit" | null;
@@ -41,6 +43,7 @@ export interface GraphState {
   // —— actions:图与交互 ——
   selectNode: (id: string | null) => void;
   setSearchTerm: (term: string) => void;
+  setTimeWindow: (window: TimeWindow | null) => void;
   toggleType: (type: MemoryNodeType) => void;
   toggleTag: (tag: string) => void;
   requestFocusNode: (id: string) => void;
@@ -94,6 +97,7 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   searchTerm: "",
   hiddenTypes: new Set<MemoryNodeType>(),
   activeTags: new Set<string>(),
+  timeWindow: null,
   focusNodeId: null,
   focusNonce: 0,
   editorMode: null,
@@ -102,6 +106,8 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   selectNode: (id) => set({ selectedNodeId: id }),
 
   setSearchTerm: (term) => set({ searchTerm: term }),
+
+  setTimeWindow: (window) => set({ timeWindow: window }),
 
   toggleType: (type) =>
     set((state) => {
@@ -133,6 +139,7 @@ export const useGraphStore = create<GraphState>((set, get) => ({
       nodes: graph.nodes,
       edges: graph.edges,
       selectedNodeId: null,
+      timeWindow: null,
     }),
 
   resetToSeed: () => {
@@ -150,6 +157,7 @@ export const useGraphStore = create<GraphState>((set, get) => ({
       searchTerm: "",
       hiddenTypes: new Set<MemoryNodeType>(),
       activeTags: new Set<string>(),
+      timeWindow: null,
     });
   },
 

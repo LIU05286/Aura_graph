@@ -7,6 +7,7 @@ import SearchPanel from "./SearchPanel";
 import TypeFilterPanel from "./TypeFilterPanel";
 import TagFilterPanel from "./TagFilterPanel";
 import GraphIOPanel from "./GraphIOPanel";
+import TimelinePanel from "./TimelinePanel";
 import GalaxyPanel from "./GalaxyPanel";
 import AiClusterPanel from "./AiClusterPanel";
 import StatsPanel from "./StatsPanel";
@@ -16,6 +17,7 @@ export default function ControlPanel() {
   const nodes = useGraphStore((s) => s.nodes);
   const hiddenTypes = useGraphStore((s) => s.hiddenTypes);
   const activeTags = useGraphStore((s) => s.activeTags);
+  const timeWindow = useGraphStore((s) => s.timeWindow);
   const edges = useGraphStore((s) => s.edges);
   const openCreateNode = useGraphStore((s) => s.openCreateNode);
   const setNodePositions = useGraphStore((s) => s.setNodePositions);
@@ -24,8 +26,8 @@ export default function ControlPanel() {
   const [collapsed, setCollapsed] = useState(false);
 
   const visibleCount = useMemo(
-    () => getVisibleNodeIds(nodes, hiddenTypes, activeTags).size,
-    [nodes, hiddenTypes, activeTags]
+    () => getVisibleNodeIds(nodes, hiddenTypes, activeTags, timeWindow).size,
+    [nodes, hiddenTypes, activeTags, timeWindow]
   );
 
   const handleRelayout = () => {
@@ -80,6 +82,7 @@ export default function ControlPanel() {
         <AiClusterPanel />
         <TypeFilterPanel />
         <TagFilterPanel />
+        <TimelinePanel />
         <GraphIOPanel />
 
         <div className="ag-footer">

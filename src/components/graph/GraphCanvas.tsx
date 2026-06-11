@@ -15,14 +15,15 @@ export default function GraphCanvas() {
   const searchTerm = useGraphStore((s) => s.searchTerm);
   const hiddenTypes = useGraphStore((s) => s.hiddenTypes);
   const activeTags = useGraphStore((s) => s.activeTags);
+  const timeWindow = useGraphStore((s) => s.timeWindow);
   const focusNodeId = useGraphStore((s) => s.focusNodeId);
   const focusNonce = useGraphStore((s) => s.focusNonce);
   const selectNode = useGraphStore((s) => s.selectNode);
   const requestFocusNode = useGraphStore((s) => s.requestFocusNode);
 
   const visibleIds = useMemo(
-    () => getVisibleNodeIds(nodes, hiddenTypes, activeTags),
-    [nodes, hiddenTypes, activeTags]
+    () => getVisibleNodeIds(nodes, hiddenTypes, activeTags, timeWindow),
+    [nodes, hiddenTypes, activeTags, timeWindow]
   );
   const matchedIds = useMemo(
     () => getMatchedNodeIds(nodes, searchTerm),

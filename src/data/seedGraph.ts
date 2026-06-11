@@ -58,8 +58,15 @@ export const seedGraph: AuraGraph = { nodes, edges };
 
 /** Returns a deep copy of the sample data (avoids sharing module constants with the store). */
 export function createSeedGraph(): AuraGraph {
+  // P5.2:给 demo 节点铺一段时间跨度,便于演示时间轴(最新的在今天附近,最旧的约 16 天前)
+  const DAY = 86400000;
+  const base = Date.now();
+  const total = seedGraph.nodes.length;
   return {
-    nodes: seedGraph.nodes.map((n) => ({ ...n, tags: [...n.tags] })),
+    nodes: seedGraph.nodes.map((n, i) => {
+      const created = new Date(base - (total - 1 - i) * DAY).toISOString();
+      return { ...n, tags: [...n.tags], createdAt: created, updatedAt: created };
+    }),
     edges: seedGraph.edges.map((e) => ({ ...e })),
   };
 }

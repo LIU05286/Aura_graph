@@ -900,3 +900,26 @@
   color: var(--ag-text-muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* —— P5.2 时间轴筛选 —— */
+.ag-timeline-range {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ag-timeline-slider {
+  width: 100%;
+  accent-color: var(--ag-accent);
+  cursor: pointer;
+}
+.ag-timeline-dates {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: var(--ag-fs-xs);
+  color: var(--ag-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.ag-timeline-reset {
+  margin-top: 8px;
+}

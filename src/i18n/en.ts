@@ -51,6 +51,9 @@ export const en = {
   "search.semanticEmpty": "No semantic matches",
   "search.placeholder": "Search by title or content…",
   "search.empty": "No matching stars",
+  // Timeline (P5.2)
+  "timeline.label": "Timeline · created",
+  "timeline.all": "All time",
   // TypeFilterPanel
   "typeFilter.label": "Types · lit means visible",
   // TagFilterPanel
