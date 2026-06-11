@@ -19,6 +19,17 @@ export default defineConfig(({ mode }) => {
             });
           },
         },
+        "/relay": {
+          target: env.RELAY_BASE_URL || "https://yunwu.ai",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/relay/, ""),
+          configure: (proxy) => {
+            proxy.on("proxyReq", (proxyReq) => {
+              const key = env.RELAY_API_KEY;
+              if (key) proxyReq.setHeader("Authorization", `Bearer ${key}`);
+            });
+          },
+        },
       },
     },
   };
