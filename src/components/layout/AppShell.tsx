@@ -5,6 +5,7 @@ import { usePersistence } from "../../hooks/usePersistence";
 import GraphCanvas from "../graph/GraphCanvas";
 import ControlPanel from "../panels/ControlPanel";
 import DetailPanel from "../panels/DetailPanel";
+import CommandPalette from "../panels/CommandPalette";
 import NodeFormModal from "../panels/NodeFormModal";
 import QuickCapture from "../panels/QuickCapture";
 import EmptyState from "../panels/EmptyState";
@@ -45,6 +46,7 @@ export default function AppShell() {
       <ControlPanel />
       <DetailPanel />
       <NodeFormModal />
+      <CommandPalette />
     </div>
   );
 }

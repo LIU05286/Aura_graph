@@ -40,6 +40,14 @@ export const en = {
   "control.relayout": "Re-layout",
   "control.collapse": "Collapse panel",
   "control.expand": "Open panel",
+  // Command palette (P5.4)
+  "cmd.placeholder": "Jump to a star or run a command…",
+  "cmd.actions": "Actions",
+  "cmd.stars": "Stars",
+  "cmd.newNode": "Create new node",
+  "cmd.relayout": "Re-layout graph",
+  "cmd.loadDemo": "Load demo into this galaxy",
+  "cmd.empty": "No matches",
   "control.footer": "{count} stars visible · drag to rotate · scroll to zoom · click to inspect",
   // SearchPanel
   "search.label": "Search memories",

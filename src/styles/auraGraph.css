@@ -956,3 +956,87 @@
   text-underline-offset: 2px;
   word-break: break-all;
 }
+
+/* —— P5.4 命令面板 —— */
+.ag-cmd-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 14vh;
+  background: rgb(var(--ag-shadow-rgb) / 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: agSlide 0.18s ease;
+}
+.ag-cmd {
+  width: min(560px, calc(100% - 36px));
+  background: var(--ag-modal-bg);
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.18);
+  border-radius: var(--ag-radius-md);
+  box-shadow: 0 24px 70px rgb(var(--ag-shadow-rgb) / 0.55);
+  overflow: hidden;
+}
+.ag-cmd-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 18px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--ag-text);
+  font-size: var(--ag-fs-lg);
+  border-bottom: 1px solid rgb(var(--ag-border-rgb) / 0.12);
+}
+.ag-cmd-results {
+  max-height: 50vh;
+  overflow: auto;
+  padding: 8px;
+}
+.ag-cmd-group {
+  padding: 8px 10px 4px;
+  font-size: var(--ag-fs-eyebrow);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ag-text-faint);
+}
+.ag-cmd-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  background: transparent;
+  border-radius: var(--ag-radius-sm);
+  color: var(--ag-text-soft);
+  font-size: var(--ag-fs-sm);
+  text-align: left;
+  cursor: pointer;
+}
+.ag-cmd-row:hover {
+  background: rgb(var(--ag-white-rgb) / 0.06);
+}
+.ag-cmd-icon {
+  flex: 0 0 auto;
+  color: var(--ag-text-faint);
+  font-size: var(--ag-fs-xs);
+}
+.ag-cmd-label {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ag-cmd-type {
+  flex: 0 0 auto;
+  font-size: var(--ag-fs-eyebrow);
+  color: var(--ag-text-faint);
+}
+.ag-cmd-empty {
+  padding: 16px 12px;
+  color: var(--ag-text-faint);
+  font-size: var(--ag-fs-sm);
+}
