@@ -8,6 +8,7 @@ import TypeFilterPanel from "./TypeFilterPanel";
 import TagFilterPanel from "./TagFilterPanel";
 import GraphIOPanel from "./GraphIOPanel";
 import GalaxyPanel from "./GalaxyPanel";
+import AiClusterPanel from "./AiClusterPanel";
 
 /** 左侧控制面板:品牌 + 搜索 + 类型筛选 + 星座筛选 + 状态行(可折叠) */
 export default function ControlPanel() {
@@ -74,6 +75,7 @@ export default function ControlPanel() {
         </div>
 
         <SearchPanel />
+        <AiClusterPanel />
         <TypeFilterPanel />
         <TagFilterPanel />
         <GraphIOPanel />

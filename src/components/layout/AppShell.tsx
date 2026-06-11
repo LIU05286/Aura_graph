@@ -8,9 +8,8 @@ import DetailPanel from "../panels/DetailPanel";
 import NodeFormModal from "../panels/NodeFormModal";
 import QuickCapture from "../panels/QuickCapture";
 import EmptyState from "../panels/EmptyState";
-import AiEmbedPing from "../AiEmbedPing";
 
-/** 应用骨架:3D 画布 + 空状态卡 + 顶部快速记录 + 左右面板 + 弹窗(+ 临时 embedding 自测) */
+/** 应用骨架:3D 画布 + 空状态卡 + 顶部快速记录 + 左右面板 + 弹窗 */
 export default function AppShell() {
   usePersistence();
 
@@ -45,7 +44,6 @@ export default function AppShell() {
       <ControlPanel />
       <DetailPanel />
       <NodeFormModal />
-      <AiEmbedPing />
     </div>
   );
 }

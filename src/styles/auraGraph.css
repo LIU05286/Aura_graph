@@ -695,3 +695,156 @@
 .ag-ai-tag:hover:not(:disabled) {
   background: rgb(var(--ag-accent-rgb) / 0.16);
 }
+
+/* —— P4.3b 语义搜索 —— */
+.ag-search-modes {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.ag-chip.on {
+  background: rgb(var(--ag-accent-rgb) / 0.12);
+  border-color: rgb(var(--ag-accent-rgb) / 0.45);
+  color: var(--ag-accent-bright);
+}
+.ag-search-run {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* —— P4.4 AI 聚类 —— */
+.ag-cluster {
+  margin-top: var(--ag-gap-section);
+}
+.ag-cluster-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ag-cluster-item {
+  padding: 10px 12px;
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.14);
+  border-radius: var(--ag-radius);
+  background: rgb(var(--ag-white-rgb) / 0.03);
+}
+.ag-cluster-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+.ag-cluster-name {
+  font-size: var(--ag-fs-sm);
+  color: var(--ag-accent-bright);
+}
+.ag-cluster-apply {
+  flex: 0 0 auto;
+}
+.ag-cluster-members {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ag-cluster-member {
+  padding: 4px 8px;
+  border-radius: var(--ag-radius-pill);
+  background: rgb(var(--ag-white-rgb) / 0.05);
+  font-size: var(--ag-fs-xs);
+  color: var(--ag-text-subtle);
+}
+
+/* —— P4.4 AI 聚类 —— */
+.ag-cluster .ag-ai-btn {
+  margin-top: 6px;
+}
+.ag-cluster-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ag-cluster-item {
+  padding: 10px 12px;
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.14);
+  border-radius: var(--ag-radius);
+  background: rgb(var(--ag-white-rgb) / 0.03);
+}
+.ag-cluster-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ag-cluster-name {
+  font-size: var(--ag-fs-sm);
+  font-weight: var(--ag-fw-bold);
+  color: var(--ag-accent-bright);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ag-cluster-apply {
+  flex: 0 0 auto;
+}
+.ag-cluster-members {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ag-cluster-member {
+  font-size: var(--ag-fs-xs);
+  color: var(--ag-text-subtle);
+  padding: 3px 8px;
+  border-radius: var(--ag-radius-pill);
+  background: rgb(var(--ag-white-rgb) / 0.04);
+}
+
+/* —— P4.4 AI 聚类 —— */
+.ag-cluster .ag-ai-btn {
+  margin-top: 6px;
+}
+.ag-cluster-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ag-cluster-item {
+  padding: 10px 12px;
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.14);
+  border-radius: var(--ag-radius);
+  background: rgb(var(--ag-white-rgb) / 0.03);
+}
+.ag-cluster-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ag-cluster-name {
+  font-size: var(--ag-fs-sm);
+  font-weight: var(--ag-fw-bold);
+  color: var(--ag-accent-bright);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ag-cluster-apply {
+  flex: 0 0 auto;
+}
+.ag-cluster-members {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ag-cluster-member {
+  font-size: var(--ag-fs-xs);
+  color: var(--ag-text-subtle);
+  padding: 3px 8px;
+  border-radius: var(--ag-radius-pill);
+  background: rgb(var(--ag-white-rgb) / 0.04);
+}

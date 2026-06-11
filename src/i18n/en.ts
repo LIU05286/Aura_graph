@@ -25,12 +25,24 @@ export const en = {
   "ai.noCandidates": "Nothing left to connect in this galaxy.",
   // ControlPanel
   "control.newNode": "+ New Node",
+  // AI clustering (P4.4)
+  "cluster.label": "Constellations (AI)",
+  "cluster.suggest": "✦ Suggest constellations",
+  "cluster.apply": "Apply as tag",
+  "cluster.none": "No groups suggested",
+  "cluster.tooFew": "Add at least 3 stars first.",
   "control.relayout": "Re-layout",
   "control.collapse": "Collapse panel",
   "control.expand": "Open panel",
   "control.footer": "{count} stars visible · drag to rotate · scroll to zoom · click to inspect",
   // SearchPanel
   "search.label": "Search memories",
+  "search.modeText": "Text",
+  "search.modeSemantic": "Semantic",
+  "search.semanticPlaceholder": "Search by meaning…",
+  "search.semanticSearch": "Search",
+  "search.searching": "Searching…",
+  "search.semanticEmpty": "No semantic matches",
   "search.placeholder": "Search by title or content…",
   "search.empty": "No matching stars",
   // TypeFilterPanel
