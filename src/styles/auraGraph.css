@@ -848,3 +848,55 @@
   border-radius: var(--ag-radius-pill);
   background: rgb(var(--ag-white-rgb) / 0.04);
 }
+
+/* —— P5.1 概览仪表盘 —— */
+.ag-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.ag-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.12);
+  border-radius: var(--ag-radius);
+  background: rgb(var(--ag-white-rgb) / 0.03);
+}
+.ag-stat-num {
+  font-size: var(--ag-fs-lg);
+  font-weight: var(--ag-fw-bold);
+  color: var(--ag-accent-bright);
+  line-height: 1.1;
+}
+.ag-stat-label {
+  font-size: var(--ag-fs-eyebrow);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ag-text-subtle);
+}
+.ag-stats-types {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.ag-stats-type-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--ag-fs-xs);
+  color: var(--ag-text-soft);
+}
+.ag-stats-type-name {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ag-stats-type-count {
+  flex: 0 0 auto;
+  color: var(--ag-text-muted);
+  font-variant-numeric: tabular-nums;
+}

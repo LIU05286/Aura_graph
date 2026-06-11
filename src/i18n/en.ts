@@ -8,6 +8,12 @@ export const en = {
   "galaxy.promptRename": "Rename this galaxy",
   "galaxy.confirmDelete": "Delete galaxy \"{name}\" and everything in it? This cannot be undone.",
   "galaxy.cannotDeleteLast": "You must keep at least one galaxy.",
+  // Overview (P5.1)
+  "stats.label": "Overview",
+  "stats.stars": "Stars",
+  "stats.links": "Links",
+  "stats.constellations": "Constellations",
+  "stats.isolated": "Isolated",
   // QuickCapture
   "capture.placeholder": "Capture a thought… press Enter",
   // EmptyState
