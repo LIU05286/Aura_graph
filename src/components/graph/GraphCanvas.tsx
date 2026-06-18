@@ -1,8 +1,11 @@
-import { useMemo } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import { useGraphStore } from "../../store/graphStore";
 import { getVisibleNodeIds } from "../../utils/graphFilter";
 import { getMatchedNodeIds } from "../../utils/graphSearch";
-import StarScene from "./scene/StarScene";
+
+// 懒加载整棵 3D 场景子树(StarScene 及其 three / @react-three / three-stdlib 依赖),
+// 让 three 全家桶离开入口 chunk、按需加载。fallback 复用画布外壳类,加载期保持深色背景连续。
+const StarScene = lazy(() => import("./scene/StarScene"));
 
 /**
  * 适配器:从 Zustand 读状态,计算派生数据,喂给纯渲染组件 StarScene。
@@ -32,17 +35,19 @@ export default function GraphCanvas() {
   const hasSearch = searchTerm.trim() !== "";
 
   return (
-    <StarScene
-      nodes={nodes}
-      edges={edges}
-      visibleIds={visibleIds}
-      matchedIds={matchedIds}
-      hasSearch={hasSearch}
-      selectedNodeId={selectedNodeId}
-      focusNodeId={focusNodeId}
-      focusNonce={focusNonce}
-      onSelect={selectNode}
-      onFocus={requestFocusNode}
-    />
+    <Suspense fallback={<div className="ag-canvas-wrap" />}>
+      <StarScene
+        nodes={nodes}
+        edges={edges}
+        visibleIds={visibleIds}
+        matchedIds={matchedIds}
+        hasSearch={hasSearch}
+        selectedNodeId={selectedNodeId}
+        focusNodeId={focusNodeId}
+        focusNonce={focusNonce}
+        onSelect={selectNode}
+        onFocus={requestFocusNode}
+      />
+    </Suspense>
   );
 }
