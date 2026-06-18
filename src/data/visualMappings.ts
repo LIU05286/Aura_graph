@@ -15,18 +15,24 @@ export const TYPE_COLOR: Record<MemoryNodeType, string> = {
   course: "#F472B6",
   event: "#818CF8",
   concept: "#22D3EE",
+  life: "#FB7185",
+  phrase: "#A3E635",
+  knowledge: "#E879F9",
 };
 
 /** Type → label */
 export const TYPE_LABEL: Record<MemoryNodeType, string> = {
-  idea: "Idea",
-  note: "Note",
-  person: "Person",
-  project: "Project",
-  book: "Book",
-  course: "Course",
-  event: "Event",
-  concept: "Concept",
+  idea: "灵感",
+  note: "笔记",
+  person: "人物",
+  project: "项目",
+  book: "书籍",
+  course: "课程",
+  event: "事件",
+  concept: "概念",
+  life: "生活",
+  phrase: "短语",
+  knowledge: "知识",
 };
 
 /** importance(1..5) → 核心球半径(纯函数,便于测试) */

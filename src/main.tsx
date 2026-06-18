@@ -7,6 +7,7 @@ import "@fontsource/inter/700.css";
 import "./styles/global.css";
 import "./styles/auraGraph.css";
 import "./styles/layout.css";
+import "./styles/memory.css";
 
 const rootEl = document.getElementById("root");
 if (!rootEl) throw new Error("缺少 #root 挂载点");

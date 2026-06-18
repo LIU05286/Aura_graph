@@ -20,15 +20,18 @@ export default function AppShell() {
   const timeWindow = useGraphStore((s) => s.timeWindow);
   const selectedNodeId = useGraphStore((s) => s.selectedNodeId);
   const selectNode = useGraphStore((s) => s.selectNode);
+  const currentView = useGraphStore((s) => s.currentView);
 
   const visibleIds = useMemo(
     () => getVisibleNodeIds(nodes, hiddenTypes, activeTags, timeWindow),
     [nodes, hiddenTypes, activeTags, timeWindow]
   );
 
+  // 仅在星图视图:选中的星若被筛选隐藏则取消选中(列表视图不受图筛选影响)
   useEffect(() => {
+    if (currentView !== "graph") return;
     if (selectedNodeId && !visibleIds.has(selectedNodeId)) selectNode(null);
-  }, [visibleIds, selectedNodeId, selectNode]);
+  }, [currentView, visibleIds, selectedNodeId, selectNode]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

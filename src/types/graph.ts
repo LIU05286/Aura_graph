@@ -11,7 +11,17 @@ export type MemoryNodeType =
   | "book"
   | "course"
   | "event"
-  | "concept";
+  | "concept"
+  // —— 第二阶段新增类型 ——
+  | "life"
+  | "phrase"
+  | "knowledge";
+
+/** 记忆处理状态(第二阶段新增):待整理 / 已整理 / 已归档 */
+export type MemoryStatus = "inbox" | "processed" | "archived";
+
+/** 状态稳定顺序 */
+export const MEMORY_STATUSES: MemoryStatus[] = ["inbox", "processed", "archived"];
 
 export type MemoryEdgeType =
   | "related"
@@ -35,6 +45,8 @@ export interface MemoryNode {
   importance: Intensity;
   createdAt: string; // ISO 字符串
   updatedAt: string; // ISO 字符串
+  /** 处理状态(第二阶段新增);旧数据无此字段,读取时一律视为 "processed" */
+  status?: MemoryStatus;
   /** 3D 坐标(由 seed 或未来的布局算法写入) */
   x: number;
   y: number;
@@ -71,6 +83,9 @@ export const NODE_TYPES: MemoryNodeType[] = [
   "course",
   "event",
   "concept",
+  "life",
+  "phrase",
+  "knowledge",
 ];
 
 
