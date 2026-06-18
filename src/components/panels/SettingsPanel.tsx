@@ -1,27 +1,29 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useGraphStore } from "../../store/graphStore";
 import { loadAiConfig, saveAiConfig, type AiConfig } from "../../ai/aiConfig";
 import { t } from "../../i18n";
 
 /** AI 配置入口 + 模态:chat / embeddings 双端点各填 base URL / key / model。key 只存本机 localStorage。 */
 export default function SettingsPanel() {
-  const [open, setOpen] = useState(false);
+  const aiSettingsOpen = useGraphStore((s) => s.aiSettingsOpen);
+  const openAiSettings = useGraphStore((s) => s.openAiSettings);
+  const closeAiSettings = useGraphStore((s) => s.closeAiSettings);
+
   const [draft, setDraft] = useState<AiConfig>(() => loadAiConfig());
 
   // 每次打开都从存储重载,丢弃上次未保存的编辑
   useEffect(() => {
-    if (open) setDraft(loadAiConfig());
-  }, [open]);
-
-  const close = () => setOpen(false);
+    if (aiSettingsOpen) setDraft(loadAiConfig());
+  }, [aiSettingsOpen]);
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) close();
+    if (e.target === e.currentTarget) closeAiSettings();
   };
 
   const handleSave = () => {
     saveAiConfig(draft);
-    close();
+    closeAiSettings();
   };
 
   const setField = (
@@ -37,11 +39,11 @@ export default function SettingsPanel() {
   return (
     <div className="ag-section">
       <label className="ag-eyebrow">{t("settings.label")}</label>
-      <button type="button" className="ag-chip" onClick={() => setOpen(true)}>
+      <button type="button" className="ag-chip" onClick={openAiSettings}>
         {t("settings.open")}
       </button>
 
-      {open &&
+      {aiSettingsOpen &&
         createPortal(
           <div className="ag-modal-overlay" onClick={handleOverlayClick}>
             <div className="ag-modal">
@@ -110,7 +112,7 @@ export default function SettingsPanel() {
               <div className="ag-modal-hint">{t("settings.hint")}</div>
 
               <div className="ag-modal-actions">
-                <button type="button" className="ag-chip" onClick={close}>
+                <button type="button" className="ag-chip" onClick={closeAiSettings}>
                   {t("form.cancel")}
                 </button>
                 <button type="button" className="ag-chip" onClick={handleSave}>

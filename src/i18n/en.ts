@@ -23,6 +23,7 @@ export const en = {
   // AI tags (P4.2)
   "ai.suggestTags": "✦ Suggest tags (AI)",
   "ai.tagsNone": "No new tags suggested",
+  "ai.configure": "✦ Add API key to enable",
   // AI relations (P4.1b)
   "ai.suggest": "✦ Suggest relations (AI)",
   "ai.suggesting": "Thinking…",

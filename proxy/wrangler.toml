@@ -1,0 +1,7 @@
+name = "aura-graph-ai-proxy"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+# 上游提供商;每个提供商部署一个 Worker 时,改这里再 deploy
+[vars]
+UPSTREAM = "https://api.deepseek.com"

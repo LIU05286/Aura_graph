@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useGraphStore } from "../../store/graphStore";
 import { deepseekChat } from "../../ai/deepseek";
+import { useChatConfigured } from "../../ai/useAiConfig";
 import { t } from "../../i18n";
+import AiConfigGate from "./AiConfigGate";
 
 interface Cluster {
   name: string;
@@ -12,6 +14,7 @@ interface Cluster {
 export default function AiClusterPanel() {
   const nodes = useGraphStore((s) => s.nodes);
   const updateNode = useGraphStore((s) => s.updateNode);
+  const chatOk = useChatConfigured();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -93,14 +96,18 @@ export default function AiClusterPanel() {
   return (
     <div className="ag-section ag-cluster">
       <label className="ag-eyebrow">{t("cluster.label")}</label>
-      <button
-        type="button"
-        className="ag-chip ag-chip-primary ag-ai-btn"
-        onClick={suggest}
-        disabled={loading}
-      >
-        {loading ? t("ai.suggesting") : t("cluster.suggest")}
-      </button>
+      {chatOk ? (
+        <button
+          type="button"
+          className="ag-chip ag-chip-primary ag-ai-btn"
+          onClick={suggest}
+          disabled={loading}
+        >
+          {loading ? t("ai.suggesting") : t("cluster.suggest")}
+        </button>
+      ) : (
+        <AiConfigGate />
+      )}
 
       {error && <div className="ag-ai-error">{error}</div>}
       {clusters && clusters.length === 0 && !error && (

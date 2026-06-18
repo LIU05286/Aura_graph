@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useGraphStore } from "../../store/graphStore";
 import type { MemoryNode } from "../../types/graph";
 import { deepseekChat } from "../../ai/deepseek";
+import { useChatConfigured } from "../../ai/useAiConfig";
 import { t } from "../../i18n";
+import AiConfigGate from "./AiConfigGate";
 
 /** AI 标签建议:只建议,用户点 + 才写入节点 tags */
 export default function AiSuggestTags({ node }: { node: MemoryNode }) {
   const nodes = useGraphStore((s) => s.nodes);
   const updateNode = useGraphStore((s) => s.updateNode);
+  const chatOk = useChatConfigured();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -69,9 +72,13 @@ export default function AiSuggestTags({ node }: { node: MemoryNode }) {
 
   return (
     <div className="ag-ai ag-ai-tags">
-      <button type="button" className="ag-chip ag-ai-btn" onClick={suggest} disabled={loading}>
-        {loading ? t("ai.suggesting") : t("ai.suggestTags")}
-      </button>
+      {chatOk ? (
+        <button type="button" className="ag-chip ag-ai-btn" onClick={suggest} disabled={loading}>
+          {loading ? t("ai.suggesting") : t("ai.suggestTags")}
+        </button>
+      ) : (
+        <AiConfigGate />
+      )}
 
       {error && <div className="ag-ai-error">{error}</div>}
 

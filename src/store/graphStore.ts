@@ -39,6 +39,7 @@ export interface GraphState {
   focusNonce: number;
   editorMode: "create" | "edit" | null;
   editorNodeId: string | null;
+  aiSettingsOpen: boolean;
 
   // —— actions:图与交互 ——
   selectNode: (id: string | null) => void;
@@ -50,6 +51,8 @@ export interface GraphState {
   openCreateNode: () => void;
   openEditNode: (id: string) => void;
   closeEditor: () => void;
+  openAiSettings: () => void;
+  closeAiSettings: () => void;
   replaceGraph: (graph: AuraGraph) => void;
   resetToSeed: () => void;
 
@@ -102,6 +105,7 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   focusNonce: 0,
   editorMode: null,
   editorNodeId: null,
+  aiSettingsOpen: false,
 
   selectNode: (id) => set({ selectedNodeId: id }),
 
@@ -133,6 +137,10 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   openEditNode: (id) => set({ editorMode: "edit", editorNodeId: id }),
 
   closeEditor: () => set({ editorMode: null, editorNodeId: null }),
+
+  openAiSettings: () => set({ aiSettingsOpen: true }),
+
+  closeAiSettings: () => set({ aiSettingsOpen: false }),
 
   replaceGraph: (graph) =>
     set({

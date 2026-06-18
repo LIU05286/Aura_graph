@@ -4,8 +4,10 @@ import { searchNodes } from "../../utils/graphSearch";
 import { getVisibleNodeIds } from "../../utils/graphFilter";
 import { TYPE_LABEL } from "../../data/visualMappings";
 import { embedTexts, embedOne } from "../../ai/relay";
+import { useEmbeddingsConfigured } from "../../ai/useAiConfig";
 import type { MemoryNode } from "../../types/graph";
 import { t } from "../../i18n";
+import AiConfigGate from "./AiConfigGate";
 import TypeDot from "../ui/TypeDot";
 
 // 模块级 embedding 缓存:键为节点文本,文本不变即复用,跨渲染/重挂载保留(单会话)
@@ -45,6 +47,8 @@ export default function SearchPanel() {
   const setSearchTerm = useGraphStore((s) => s.setSearchTerm);
   const selectNode = useGraphStore((s) => s.selectNode);
   const requestFocusNode = useGraphStore((s) => s.requestFocusNode);
+  const openAiSettings = useGraphStore((s) => s.openAiSettings);
+  const embeddingsOk = useEmbeddingsConfigured();
 
   const [mode, setMode] = useState<Mode>("text");
   const [loading, setLoading] = useState(false);
@@ -67,6 +71,10 @@ export default function SearchPanel() {
   };
 
   const runSemantic = async () => {
+    if (!embeddingsOk) {
+      openAiSettings();
+      return;
+    }
     const q = searchTerm.trim();
     if (!q) {
       setSemanticResults(null);
@@ -151,11 +159,14 @@ export default function SearchPanel() {
         onKeyDown={onKeyDown}
       />
 
-      {mode === "semantic" && (
-        <button type="button" className="ag-chip ag-search-run" onClick={runSemantic} disabled={loading}>
-          {loading ? t("search.searching") : t("search.semanticSearch")}
-        </button>
-      )}
+      {mode === "semantic" &&
+        (embeddingsOk ? (
+          <button type="button" className="ag-chip ag-search-run" onClick={runSemantic} disabled={loading}>
+            {loading ? t("search.searching") : t("search.semanticSearch")}
+          </button>
+        ) : (
+          <AiConfigGate />
+        ))}
 
       {(mode === "text" ? searchTerm.trim() !== "" : semanticResults !== null || error !== "") && (
         <div className="ag-results">

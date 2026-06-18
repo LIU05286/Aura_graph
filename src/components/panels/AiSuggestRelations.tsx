@@ -4,7 +4,9 @@ import { getIncidentEdges } from "../../utils/graphRelations";
 import { EDGE_TYPE_LABEL } from "../../data/visualMappings";
 import type { MemoryNode, MemoryEdge, MemoryEdgeType } from "../../types/graph";
 import { deepseekChat } from "../../ai/deepseek";
+import { useChatConfigured } from "../../ai/useAiConfig";
 import { t } from "../../i18n";
+import AiConfigGate from "./AiConfigGate";
 
 const EDGE_TYPES: MemoryEdgeType[] = [
   "related",
@@ -27,6 +29,7 @@ export default function AiSuggestRelations({ node }: { node: MemoryNode }) {
   const nodes = useGraphStore((s) => s.nodes);
   const edges = useGraphStore((s) => s.edges);
   const addEdge = useGraphStore((s) => s.addEdge);
+  const chatOk = useChatConfigured();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -129,9 +132,13 @@ export default function AiSuggestRelations({ node }: { node: MemoryNode }) {
 
   return (
     <div className="ag-ai">
-      <button type="button" className="ag-chip ag-ai-btn" onClick={suggest} disabled={loading}>
-        {loading ? t("ai.suggesting") : t("ai.suggest")}
-      </button>
+      {chatOk ? (
+        <button type="button" className="ag-chip ag-ai-btn" onClick={suggest} disabled={loading}>
+          {loading ? t("ai.suggesting") : t("ai.suggest")}
+        </button>
+      ) : (
+        <AiConfigGate />
+      )}
 
       {error && <div className="ag-ai-error">{error}</div>}
 
