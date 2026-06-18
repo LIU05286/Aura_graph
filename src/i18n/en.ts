@@ -48,6 +48,19 @@ export const en = {
   "cmd.relayout": "Re-layout graph",
   "cmd.loadDemo": "Load demo into this galaxy",
   "cmd.empty": "No matches",
+  // AI settings (P6) —— BYOK 双端点
+  "settings.label": "AI · API",
+  "settings.open": "⚙ Configure AI keys",
+  "settings.title": "AI configuration",
+  "settings.chatGroup": "Chat endpoint",
+  "settings.embeddingsGroup": "Embeddings endpoint",
+  "settings.baseUrl": "Base URL",
+  "settings.apiKey": "API key",
+  "settings.model": "Model",
+  "settings.basePlaceholder": "https://your-relay/v1",
+  "settings.keyPlaceholder": "sk-…",
+  "settings.hint":
+    "Keys are stored only in this browser (localStorage). Don't enter someone else's key on a shared or public deployment.",
   "control.footer": "{count} stars visible · drag to rotate · scroll to zoom · click to inspect",
   // SearchPanel
   "search.label": "Search memories",

@@ -1040,3 +1040,20 @@
   color: var(--ag-text-faint);
   font-size: var(--ag-fs-sm);
 }
+
+/* —— AI 设置模态:分组标题 + 安全提示(P6) —— */
+.ag-modal-group {
+  margin-top: 16px;
+  margin-bottom: 4px;
+  font-size: var(--ag-fs-eyebrow);
+  font-weight: var(--ag-fw-bold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ag-text-subtle);
+}
+.ag-modal-hint {
+  margin-top: var(--ag-gap-section);
+  font-size: var(--ag-fs-footer);
+  line-height: var(--ag-lh-relaxed);
+  color: var(--ag-text-fainter);
+}

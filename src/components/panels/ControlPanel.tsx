@@ -7,6 +7,7 @@ import SearchPanel from "./SearchPanel";
 import TypeFilterPanel from "./TypeFilterPanel";
 import TagFilterPanel from "./TagFilterPanel";
 import GraphIOPanel from "./GraphIOPanel";
+import SettingsPanel from "./SettingsPanel";
 import TimelinePanel from "./TimelinePanel";
 import GalaxyPanel from "./GalaxyPanel";
 import AiClusterPanel from "./AiClusterPanel";
@@ -84,6 +85,7 @@ export default function ControlPanel() {
         <TagFilterPanel />
         <TimelinePanel />
         <GraphIOPanel />
+        <SettingsPanel />
 
         <div className="ag-footer">
           {t("control.footer", { count: visibleCount })}
