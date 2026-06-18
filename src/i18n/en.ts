@@ -132,6 +132,22 @@ export const en = {
   "edge.source": "Source",
   "edge.similar": "Similar",
   "edge.extends": "Extends",
+  // —— 第一阶段:Shell / 导航 / 视图占位 ——
+  "app.name": "AURA GRAPH",
+  "app.tagline": "记忆星图",
+  "nav.today": "今天",
+  "nav.inbox": "收件箱",
+  "nav.memories": "记忆",
+  "nav.graph": "星图",
+  "nav.review": "复盘",
+  "nav.agents": "智能体",
+  "nav.settings": "设置",
+  "nav.more": "更多",
+  "view.comingSoon": "该功能将在后续阶段实现",
+  "inspector.empty": "选择一颗记忆查看其详情",
+  "inspector.title": "详情",
+  "graph.openControls": "控制面板",
+  "graph.controlsTitle": "星图控制",
 } as const;
 
 export type TranslationKey = keyof typeof en;

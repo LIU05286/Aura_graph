@@ -92,3 +92,24 @@ export interface TimeWindow {
   start: number;
   end: number;
 }
+
+/** 应用主视图(第一阶段新增):决定中间主工作区渲染哪个页面 */
+export type AppView =
+  | "today"
+  | "inbox"
+  | "memories"
+  | "graph"
+  | "review"
+  | "agents"
+  | "settings";
+
+/** 视图稳定顺序(导航 / 底部 Tab 用) */
+export const APP_VIEWS: AppView[] = [
+  "today",
+  "inbox",
+  "memories",
+  "graph",
+  "review",
+  "agents",
+  "settings",
+];

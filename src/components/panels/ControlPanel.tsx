@@ -6,14 +6,11 @@ import { t } from "../../i18n";
 import SearchPanel from "./SearchPanel";
 import TypeFilterPanel from "./TypeFilterPanel";
 import TagFilterPanel from "./TagFilterPanel";
-import GraphIOPanel from "./GraphIOPanel";
-import SettingsPanel from "./SettingsPanel";
 import TimelinePanel from "./TimelinePanel";
-import GalaxyPanel from "./GalaxyPanel";
 import AiClusterPanel from "./AiClusterPanel";
 import StatsPanel from "./StatsPanel";
 
-/** 左侧控制面板:品牌 + 搜索 + 类型筛选 + 星座筛选 + 状态行(可折叠) */
+/** 星图控制面板(瘦身版):仅图探索工具。星系切换 / 导入导出 / AI 设置已迁出。 */
 export default function ControlPanel() {
   const nodes = useGraphStore((s) => s.nodes);
   const hiddenTypes = useGraphStore((s) => s.hiddenTypes);
@@ -23,7 +20,6 @@ export default function ControlPanel() {
   const openCreateNode = useGraphStore((s) => s.openCreateNode);
   const setNodePositions = useGraphStore((s) => s.setNodePositions);
 
-  // 折叠状态:纯 UI 本地状态,不进 store
   const [collapsed, setCollapsed] = useState(false);
 
   const visibleCount = useMemo(
@@ -58,16 +54,6 @@ export default function ControlPanel() {
         >
           ‹
         </button>
-
-        <div className="ag-brand">
-          <span className="ag-brand-mark" />
-          <div>
-            <div className="ag-brand-name">AURA GRAPH</div>
-            <div className="ag-brand-sub">memory universe</div>
-          </div>
-        </div>
-
-        <GalaxyPanel />
         <StatsPanel />
 
         <div className="ag-section ag-actions">
@@ -84,8 +70,6 @@ export default function ControlPanel() {
         <TypeFilterPanel />
         <TagFilterPanel />
         <TimelinePanel />
-        <GraphIOPanel />
-        <SettingsPanel />
 
         <div className="ag-footer">
           {t("control.footer", { count: visibleCount })}

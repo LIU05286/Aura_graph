@@ -7,6 +7,7 @@ import type {
   Galaxy,
   GalaxyKind,
   TimeWindow,
+  AppView,
 } from "../types/graph";
 import { createSeedGraph } from "../data/seedGraph";
 import { computeLayout } from "../utils/graphLayout";
@@ -41,6 +42,9 @@ export interface GraphState {
   editorNodeId: string | null;
   aiSettingsOpen: boolean;
 
+  // —— 主视图(第一阶段新增) ——
+  currentView: AppView;
+
   // —— actions:图与交互 ——
   selectNode: (id: string | null) => void;
   setSearchTerm: (term: string) => void;
@@ -53,6 +57,7 @@ export interface GraphState {
   closeEditor: () => void;
   openAiSettings: () => void;
   closeAiSettings: () => void;
+  setCurrentView: (view: AppView) => void;
   replaceGraph: (graph: AuraGraph) => void;
   resetToSeed: () => void;
 
@@ -106,6 +111,7 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   editorMode: null,
   editorNodeId: null,
   aiSettingsOpen: false,
+  currentView: "graph",
 
   selectNode: (id) => set({ selectedNodeId: id }),
 
@@ -141,6 +147,8 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   openAiSettings: () => set({ aiSettingsOpen: true }),
 
   closeAiSettings: () => set({ aiSettingsOpen: false }),
+
+  setCurrentView: (view) => set({ currentView: view }),
 
   replaceGraph: (graph) =>
     set({
