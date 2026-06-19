@@ -15,16 +15,15 @@ const FILTERS: { id: Filter; labelKey: TranslationKey }[] = [
   { id: "archived", labelKey: "status.archived" },
 ];
 
-/** 记忆:全部记录 + 按状态筛选 */
+/** 记忆:全部记录 + 按状态筛选 + 按日期分组 */
 export default function MemoriesView() {
   const nodes = useGraphStore((s) => s.nodes);
   const selectNode = useGraphStore((s) => s.selectNode);
   const [filter, setFilter] = useState<Filter>("all");
 
   const list = useMemo(() => {
-    const filtered =
-      filter === "all" ? nodes : nodes.filter((n) => getNodeStatus(n) === filter);
-    return filtered.slice().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    const filtered = filter === "all" ? nodes : nodes.filter((n) => getNodeStatus(n) === filter);
+    return filtered.slice().sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }, [nodes, filter]);
 
   return (
@@ -47,6 +46,7 @@ export default function MemoriesView() {
           nodes={list}
           onSelect={(id) => selectNode(id)}
           emptyText={t("list.empty")}
+          groupByDate
         />
       </div>
     </div>

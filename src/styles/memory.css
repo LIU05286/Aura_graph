@@ -118,3 +118,19 @@
   color: var(--ag-text-muted); font-family: inherit; font-size: var(--ag-fs-xs); cursor: pointer;
 }
 .memories-filter.is-active { color: var(--ag-text); border-color: rgb(var(--ag-accent-rgb) / 0.5); background: rgb(var(--ag-accent-rgb) / 0.14); }
+
+/* 修复阶段:日期提示与分组 */
+.today-date {
+  font-size: var(--ag-fs-sm);
+  color: var(--ag-text-subtle);
+  margin: -8px 0 18px;
+}
+.memory-day {
+  font-size: var(--ag-fs-xs);
+  font-weight: var(--ag-fw-bold);
+  color: var(--ag-text-faint);
+  margin: 18px 0 8px;
+}
+.memory-day:first-child {
+  margin-top: 0;
+}

@@ -19,9 +19,9 @@
   overflow: auto;
   padding: 18px;
   border-right: 1px solid rgb(var(--ag-border-rgb) / 0.12);
-  background: var(--ag-panel-bg);
-  backdrop-filter: blur(var(--ag-blur));
-  -webkit-backdrop-filter: blur(var(--ag-blur));
+  background: rgba(8, 12, 24, 0.4);
+  backdrop-filter: blur(24px) saturate(130%);
+  -webkit-backdrop-filter: blur(24px) saturate(130%);
 }
 .ds-nav-brand {
   display: flex;
@@ -71,9 +71,9 @@
   overflow: auto;
   padding: 18px;
   border-left: 1px solid rgb(var(--ag-border-rgb) / 0.12);
-  background: var(--ag-panel-bg);
-  backdrop-filter: blur(var(--ag-blur));
-  -webkit-backdrop-filter: blur(var(--ag-blur));
+  background: rgba(8, 12, 24, 0.4);
+  backdrop-filter: blur(24px) saturate(130%);
+  -webkit-backdrop-filter: blur(24px) saturate(130%);
 }
 .ds-inspector-empty {
   margin-top: 40px;
@@ -102,11 +102,29 @@
   inset: 0;
   overflow: hidden;
 }
-.graph-view .ag-capture {
+.graph-view .ag-canvas-wrap,
+.graph-view .ag-canvas,
+.graph-view .ag-labels {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+.graph-view .ag-left {
   position: absolute;
+  z-index: 6;
 }
 .graph-view .ag-rail {
   position: absolute;
+  z-index: 6;
+}
+.graph-view .ag-capture {
+  position: absolute;
+  left: auto;
+  right: 20px;
+  top: 18px;
+  transform: none;
+  width: min(360px, 42%);
+  z-index: 7;
 }
 .graph-controls-fab {
   position: absolute;

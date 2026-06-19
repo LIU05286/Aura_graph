@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useGraphStore } from "../store/graphStore";
 import { getNodeStatus } from "../utils/memoryStatus";
+import { todayHeader } from "../utils/dateLabel";
 import CaptureCenter from "../features/capture/CaptureCenter";
 import AiOrganizer from "../features/agents/AiOrganizer";
 import MemoryListView from "../features/memories/MemoryListView";
@@ -11,7 +12,7 @@ function isToday(iso: string): boolean {
   return d.toDateString() === new Date().toDateString();
 }
 
-/** 今天:记录中心 + AI 整理 + 今日记录 + 收件箱提示 */
+/** 今天:日期 + 记录中心 + AI 整理 + 今日记录 + 收件箱提示 */
 export default function TodayView() {
   const nodes = useGraphStore((s) => s.nodes);
   const selectNode = useGraphStore((s) => s.selectNode);
@@ -19,9 +20,7 @@ export default function TodayView() {
 
   const todayNodes = useMemo(
     () =>
-      nodes
-        .filter((n) => isToday(n.createdAt))
-        .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
+      nodes.filter((n) => isToday(n.createdAt)).sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
     [nodes]
   );
 
@@ -33,6 +32,9 @@ export default function TodayView() {
   return (
     <div className="page-scroll">
       <div className="page-inner">
+        <div className="page-title">{t("nav.today")}</div>
+        <div className="today-date">{todayHeader()}</div>
+
         <CaptureCenter />
         <AiOrganizer />
 

@@ -11,6 +11,7 @@ export interface ProposedNode {
   /** 合并候选:与之高度相似的已有节点(用户可选择并入) */
   mergeCandidateId?: string;
   mergeCandidateTitle?: string;
+  mergeCandidateDate?: string; // 合并候选的创建日期(用于跨天区分)
 }
 
 /** 一条待确认的关系:从"建议节点"指向"已有节点" */

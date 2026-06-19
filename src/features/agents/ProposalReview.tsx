@@ -5,6 +5,7 @@ import type { MemoryNodeType, Intensity } from "../../types/graph";
 import { NODE_TYPES } from "../../types/graph";
 import { TYPE_LABEL, EDGE_TYPE_LABEL } from "../../data/visualMappings";
 import { createCapturedNode } from "../../utils/nodeFactory";
+import { formatShort } from "../../utils/dateLabel";
 import { t } from "../../i18n";
 
 type NodeAction = "create" | "merge" | "reject";
@@ -19,6 +20,7 @@ interface EditableNode {
   action: NodeAction;
   mergeCandidateId?: string;
   mergeCandidateTitle?: string;
+  mergeCandidateDate?: string;
 }
 
 interface EditableRelation extends ProposedRelation {
@@ -50,6 +52,7 @@ export default function ProposalReview({
       action: n.mergeCandidateId ? "merge" : "create",
       mergeCandidateId: n.mergeCandidateId,
       mergeCandidateTitle: n.mergeCandidateTitle,
+      mergeCandidateDate: n.mergeCandidateDate,
     }))
   );
   const [relations, setRelations] = useState<EditableRelation[]>(() =>
@@ -72,11 +75,11 @@ export default function ProposalReview({
     );
 
   const addTag = (tempId: string) => {
-    const draft = (tagDraft[tempId] ?? "").trim();
-    if (!draft) return;
+    const d = (tagDraft[tempId] ?? "").trim();
+    if (!d) return;
     setNodes((prev) =>
       prev.map((n) =>
-        n.tempId === tempId && !n.tags.includes(draft) ? { ...n, tags: [...n.tags, draft] } : n
+        n.tempId === tempId && !n.tags.includes(d) ? { ...n, tags: [...n.tags, d] } : n
       )
     );
     setTagDraft((prev) => ({ ...prev, [tempId]: "" }));
@@ -200,6 +203,7 @@ export default function ProposalReview({
                 onClick={() => patchNode(n.tempId, { action: "merge" })}
               >
                 {t("review.merge", { title: n.mergeCandidateTitle ?? "" })}
+                {n.mergeCandidateDate ? ` · ${formatShort(n.mergeCandidateDate)}` : ""}
               </button>
             )}
             <button

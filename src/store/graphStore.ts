@@ -9,6 +9,7 @@ import type {
   TimeWindow,
   AppView,
 } from "../types/graph";
+import type { AgentProposal } from "../agents/types";
 import { createSeedGraph } from "../data/seedGraph";
 import { computeLayout } from "../utils/graphLayout";
 import {
@@ -45,6 +46,11 @@ export interface GraphState {
   // —— 主视图(第一阶段新增) ——
   currentView: AppView;
 
+  // —— 草稿(跨视图保留,修复切页丢内容) ——
+  captureDraft: { templateId: string; text: string; tags: string };
+  organizerText: string;
+  organizerProposal: AgentProposal | null;
+
   // —— actions:图与交互 ——
   selectNode: (id: string | null) => void;
   setSearchTerm: (term: string) => void;
@@ -58,6 +64,9 @@ export interface GraphState {
   openAiSettings: () => void;
   closeAiSettings: () => void;
   setCurrentView: (view: AppView) => void;
+  patchCaptureDraft: (patch: Partial<{ templateId: string; text: string; tags: string }>) => void;
+  setOrganizerText: (text: string) => void;
+  setOrganizerProposal: (proposal: AgentProposal | null) => void;
   replaceGraph: (graph: AuraGraph) => void;
   resetToSeed: () => void;
 
@@ -112,6 +121,9 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   editorNodeId: null,
   aiSettingsOpen: false,
   currentView: "graph",
+  captureDraft: { templateId: "life", text: "", tags: "" },
+  organizerText: "",
+  organizerProposal: null,
 
   selectNode: (id) => set({ selectedNodeId: id }),
 
@@ -149,6 +161,10 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   closeAiSettings: () => set({ aiSettingsOpen: false }),
 
   setCurrentView: (view) => set({ currentView: view }),
+  patchCaptureDraft: (patch) =>
+    set((state) => ({ captureDraft: { ...state.captureDraft, ...patch } })),
+  setOrganizerText: (text) => set({ organizerText: text }),
+  setOrganizerProposal: (proposal) => set({ organizerProposal: proposal }),
 
   replaceGraph: (graph) =>
     set({

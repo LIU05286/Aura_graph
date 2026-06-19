@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useGraphStore } from "../../store/graphStore";
 import { useChatConfigured } from "../../ai/useAiConfig";
 import { runOrganize } from "../../agents/agentOrchestrator";
-import type { AgentProposal } from "../../agents/types";
 import { t } from "../../i18n";
 import type { TranslationKey } from "../../i18n/en";
 import AiConfigGate from "../../components/panels/AiConfigGate";
@@ -15,16 +14,18 @@ const STEP_LABEL: Record<string, TranslationKey> = {
   relations: "agent.stepRelations",
 };
 
-/** AI 整理:粘贴文字 → 调用编排 → 产出提案 → 确认面板写入 */
+/** AI 整理:输入文字与提案都存 store,切视图不丢失。 */
 export default function AiOrganizer() {
   const nodes = useGraphStore((s) => s.nodes);
+  const text = useGraphStore((s) => s.organizerText);
+  const setText = useGraphStore((s) => s.setOrganizerText);
+  const proposal = useGraphStore((s) => s.organizerProposal);
+  const setProposal = useGraphStore((s) => s.setOrganizerProposal);
   const chatOk = useChatConfigured();
 
-  const [text, setText] = useState("");
   const [running, setRunning] = useState(false);
   const [step, setStep] = useState("");
   const [error, setError] = useState("");
-  const [proposal, setProposal] = useState<AgentProposal | null>(null);
 
   const run = async () => {
     const input = text.trim();

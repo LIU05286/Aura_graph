@@ -3,14 +3,9 @@ import type { MemoryNode } from "../../types/graph";
 import type { TranslationKey } from "../../i18n/en";
 import { TYPE_LABEL } from "../../data/visualMappings";
 import { getNodeStatus } from "../../utils/memoryStatus";
+import { formatShort } from "../../utils/dateLabel";
 import { t } from "../../i18n";
 import TypeDot from "../../components/ui/TypeDot";
-
-function formatDate(iso: string): string {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "";
-  return d.toLocaleDateString("zh-CN", { month: "2-digit", day: "2-digit" });
-}
 
 interface MemoryCardProps {
   node: MemoryNode;
@@ -44,7 +39,7 @@ export default function MemoryCard({ node, onClick, actions }: MemoryCardProps) 
               #{tag}
             </span>
           ))}
-          <span className="memory-card-date">{formatDate(node.createdAt)}</span>
+          <span className="memory-card-date">{formatShort(node.createdAt)}</span>
         </div>
       </button>
       {actions && <div className="memory-card-actions">{actions}</div>}
