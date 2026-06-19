@@ -45,6 +45,7 @@ export interface GraphState {
 
   // —— 主视图(第一阶段新增) ——
   currentView: AppView;
+  helpOpen: boolean;
 
   // —— 草稿(跨视图保留,修复切页丢内容) ——
   captureDraft: { templateId: string; text: string; tags: string };
@@ -68,6 +69,8 @@ export interface GraphState {
   openAiSettings: () => void;
   closeAiSettings: () => void;
   setCurrentView: (view: AppView) => void;
+  openHelp: () => void;
+  closeHelp: () => void;
   patchCaptureDraft: (patch: Partial<{ templateId: string; text: string; tags: string }>) => void;
   setOrganizerText: (text: string) => void;
   setOrganizerProposal: (proposal: AgentProposal | null) => void;
@@ -129,6 +132,7 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   editorNodeId: null,
   aiSettingsOpen: false,
   currentView: "graph",
+  helpOpen: false,
   captureDraft: { templateId: "life", text: "", tags: "" },
   organizerText: "",
   organizerProposal: null,
@@ -171,6 +175,8 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   closeAiSettings: () => set({ aiSettingsOpen: false }),
 
   setCurrentView: (view) => set({ currentView: view }),
+  openHelp: () => set({ helpOpen: true }),
+  closeHelp: () => set({ helpOpen: false }),
   patchCaptureDraft: (patch) =>
     set((state) => ({ captureDraft: { ...state.captureDraft, ...patch } })),
   setOrganizerText: (text) => set({ organizerText: text }),

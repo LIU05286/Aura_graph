@@ -18,6 +18,7 @@ const NAV_LABEL: Record<AppView, TranslationKey> = {
 export default function NavSidebar() {
   const currentView = useGraphStore((s) => s.currentView);
   const setCurrentView = useGraphStore((s) => s.setCurrentView);
+  const openHelp = useGraphStore((s) => s.openHelp);
 
   return (
     <nav className="ds-nav">
@@ -44,6 +45,9 @@ export default function NavSidebar() {
           </li>
         ))}
       </ul>
+      <button type="button" className="ds-nav-help" onClick={openHelp}>
+        {t("nav.help")}
+      </button>
     </nav>
   );
 }

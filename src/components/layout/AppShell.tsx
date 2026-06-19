@@ -8,6 +8,7 @@ import MobileShell from "./MobileShell";
 import NodeFormModal from "../panels/NodeFormModal";
 import CommandPalette from "../panels/CommandPalette";
 import AiSettingsModal from "../panels/AiSettingsModal";
+import Onboarding from "../panels/Onboarding";
 
 /** 应用根:持久化 + 全局键盘 + 选择桌面 / 手机外壳 + 全局模态 */
 export default function AppShell() {
@@ -47,6 +48,7 @@ export default function AppShell() {
       <NodeFormModal />
       <CommandPalette />
       <AiSettingsModal />
+      <Onboarding />
     </div>
   );
 }

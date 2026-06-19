@@ -339,3 +339,25 @@
   padding: 4px 12px;
   font-size: var(--ag-fs-xs);
 }
+.ds-nav-help {
+  margin-top: 16px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.16);
+  border-radius: var(--ag-radius);
+  background: transparent;
+  color: var(--ag-text-muted);
+  font-family: inherit;
+  font-size: var(--ag-fs-xs);
+  cursor: pointer;
+}
+.ds-nav-help:hover { color: var(--ag-text); }
+.onboard { max-width: 440px; }
+.onboard-step { font-size: var(--ag-fs-eyebrow); color: var(--ag-text-faint); margin-bottom: 8px; }
+.onboard-title { font-size: var(--ag-fs-lg); font-weight: var(--ag-fw-bold); margin-bottom: 10px; }
+.onboard-body { font-size: var(--ag-fs-sm); color: var(--ag-text-soft); line-height: var(--ag-lh-relaxed); margin: 0 0 16px; }
+.onboard-dots { display: flex; gap: 6px; margin-bottom: 18px; }
+.onboard-dot { width: 6px; height: 6px; border-radius: 50%; background: rgb(var(--ag-white-rgb) / 0.2); }
+.onboard-dot.is-active { background: var(--ag-accent-bright); }
+.onboard-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.onboard-right { display: flex; gap: 8px; }

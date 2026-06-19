@@ -145,6 +145,7 @@ export const en = {
   "nav.review": "复盘",
   "nav.agents": "智能体",
   "nav.settings": "设置",
+  "nav.help": "使用指南",
   "nav.more": "更多",
   "view.comingSoon": "该功能将在后续阶段实现",
   "inspector.empty": "选择一颗记忆查看其详情",
