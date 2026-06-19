@@ -361,6 +361,13 @@
 .onboard-dot.is-active { background: var(--ag-accent-bright); }
 .onboard-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .onboard-right { display: flex; gap: 8px; }
+/* 引导按钮:文字横向不换行,按内容宽度自适应 */
+.onboard-actions .ag-chip,
+.onboard-right .ag-chip {
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: auto;
+}
 /* 详情头部类型圆点(带发光)不被滚动容器顶边裁切 */
 .ds-inspector .ag-right,
 .sheet-body .ag-right {
