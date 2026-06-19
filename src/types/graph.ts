@@ -47,6 +47,8 @@ export interface MemoryNode {
   updatedAt: string; // ISO 字符串
   /** 处理状态(第二阶段新增);旧数据无此字段,读取时一律视为 "processed" */
   status?: MemoryStatus;
+  /** 上次复盘时间(第四阶段);用于"待复盘"判定 */
+  reviewedAt?: string;
   /** 3D 坐标(由 seed 或未来的布局算法写入) */
   x: number;
   y: number;

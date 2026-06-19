@@ -28,3 +28,27 @@ export interface AgentProposal {
   tags: string[];
   relations: ProposedRelation[];
 }
+
+/** 一次问答的回答 */
+export interface QaAnswer {
+  answer: string;
+  usedNodeIds: string[];
+  contextIds: string[];
+}
+
+/** 问答历史的一轮 */
+export interface QaTurn {
+  id: string;
+  question: string;
+  answer: string;
+  usedNodeIds: string[];
+}
+
+/** 复盘结果 */
+export interface ReviewResult {
+  summary: string;
+  themes: string[];
+  mood: string;
+  ideas: string[];
+  todos: string[];
+}

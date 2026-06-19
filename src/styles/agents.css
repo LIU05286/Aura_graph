@@ -66,3 +66,58 @@
   color: var(--ag-accent-bright); font-family: inherit; font-size: var(--ag-fs-sm); cursor: pointer;
 }
 .review-apply:disabled { opacity: 0.45; cursor: default; }
+
+/* 第四阶段:问答 / 复盘 */
+.qa-box { margin-bottom: 8px; }
+.qa-thread-head { display: flex; align-items: center; justify-content: space-between; }
+.qa-turn {
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.14);
+  border-radius: var(--ag-radius);
+  background: var(--ag-panel-bg);
+}
+.qa-question { font-weight: var(--ag-fw-bold); margin-bottom: 8px; }
+.qa-answer {
+  font-size: var(--ag-fs-sm);
+  color: var(--ag-text-soft);
+  line-height: var(--ag-lh-relaxed);
+  white-space: pre-wrap;
+}
+.qa-cite-label {
+  margin: 12px 0 8px;
+  font-size: var(--ag-fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ag-text-subtle);
+}
+.review-run { margin-bottom: 14px; }
+.review-result {
+  margin-bottom: 8px;
+  padding: 16px 18px;
+  border: 1px solid rgb(var(--ag-border-rgb) / 0.16);
+  border-radius: var(--ag-radius-md);
+  background: var(--ag-panel-bg);
+}
+.review-summary {
+  margin: 0 0 12px;
+  font-size: var(--ag-fs-sm);
+  line-height: var(--ag-lh-relaxed);
+  color: var(--ag-text);
+}
+.review-block { margin-top: 12px; }
+.review-block-title {
+  font-size: var(--ag-fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ag-text-subtle);
+  margin-bottom: 6px;
+}
+.review-ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: var(--ag-fs-sm);
+  color: var(--ag-text-soft);
+  line-height: var(--ag-lh-relaxed);
+}
+.review-ul li { margin-bottom: 4px; }

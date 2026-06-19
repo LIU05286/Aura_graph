@@ -9,7 +9,7 @@ import type {
   TimeWindow,
   AppView,
 } from "../types/graph";
-import type { AgentProposal } from "../agents/types";
+import type { AgentProposal, QaTurn } from "../agents/types";
 import { createSeedGraph } from "../data/seedGraph";
 import { computeLayout } from "../utils/graphLayout";
 import {
@@ -51,6 +51,10 @@ export interface GraphState {
   organizerText: string;
   organizerProposal: AgentProposal | null;
 
+  // —— 问答(第四阶段) ——
+  qaInput: string;
+  qaThread: QaTurn[];
+
   // —— actions:图与交互 ——
   selectNode: (id: string | null) => void;
   setSearchTerm: (term: string) => void;
@@ -67,6 +71,9 @@ export interface GraphState {
   patchCaptureDraft: (patch: Partial<{ templateId: string; text: string; tags: string }>) => void;
   setOrganizerText: (text: string) => void;
   setOrganizerProposal: (proposal: AgentProposal | null) => void;
+  setQaInput: (text: string) => void;
+  pushQaTurn: (turn: QaTurn) => void;
+  clearQaThread: () => void;
   replaceGraph: (graph: AuraGraph) => void;
   resetToSeed: () => void;
 
@@ -124,6 +131,8 @@ export const useGraphStore = create<GraphState>((set, get) => ({
   captureDraft: { templateId: "life", text: "", tags: "" },
   organizerText: "",
   organizerProposal: null,
+  qaInput: "",
+  qaThread: [],
 
   selectNode: (id) => set({ selectedNodeId: id }),
 
@@ -165,6 +174,9 @@ export const useGraphStore = create<GraphState>((set, get) => ({
     set((state) => ({ captureDraft: { ...state.captureDraft, ...patch } })),
   setOrganizerText: (text) => set({ organizerText: text }),
   setOrganizerProposal: (proposal) => set({ organizerProposal: proposal }),
+  setQaInput: (text) => set({ qaInput: text }),
+  pushQaTurn: (turn) => set((state) => ({ qaThread: [...state.qaThread, turn] })),
+  clearQaThread: () => set({ qaThread: [] }),
 
   replaceGraph: (graph) =>
     set({
