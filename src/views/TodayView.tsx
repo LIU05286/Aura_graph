@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useGraphStore } from "../store/graphStore";
 import { getNodeStatus } from "../utils/memoryStatus";
 import CaptureCenter from "../features/capture/CaptureCenter";
+import AiOrganizer from "../features/agents/AiOrganizer";
 import MemoryListView from "../features/memories/MemoryListView";
 import { t } from "../i18n";
 
@@ -10,7 +11,7 @@ function isToday(iso: string): boolean {
   return d.toDateString() === new Date().toDateString();
 }
 
-/** 今天:记录中心 + 今日记录 + 收件箱待整理提示 */
+/** 今天:记录中心 + AI 整理 + 今日记录 + 收件箱提示 */
 export default function TodayView() {
   const nodes = useGraphStore((s) => s.nodes);
   const selectNode = useGraphStore((s) => s.selectNode);
@@ -33,24 +34,17 @@ export default function TodayView() {
     <div className="page-scroll">
       <div className="page-inner">
         <CaptureCenter />
+        <AiOrganizer />
 
         {inboxCount > 0 && (
-          <button
-            type="button"
-            className="today-inbox-banner"
-            onClick={() => setCurrentView("inbox")}
-          >
+          <button type="button" className="today-inbox-banner" onClick={() => setCurrentView("inbox")}>
             <span>{t("today.inboxPending", { count: inboxCount })}</span>
             <span className="today-inbox-go">{t("today.goInbox")}</span>
           </button>
         )}
 
         <div className="page-section-title">{t("today.todayRecords")}</div>
-        <MemoryListView
-          nodes={todayNodes}
-          onSelect={(id) => selectNode(id)}
-          emptyText={t("list.empty")}
-        />
+        <MemoryListView nodes={todayNodes} onSelect={(id) => selectNode(id)} emptyText={t("list.empty")} />
       </div>
     </div>
   );

@@ -180,6 +180,26 @@ export const en = {
   "inbox.archive": "归档",
   "memories.title": "记忆",
   "memories.filterAll": "全部",
+  // —— 第三阶段:AI 整理 / 确认面板 ——
+  "agent.title": "AI 整理",
+  "agent.subtitle": "粘贴一段文字,AI 帮你拆成记忆、打标签、找关联",
+  "agent.placeholder": "把想整理的内容粘贴到这里…",
+  "agent.run": "AI 整理",
+  "agent.running": "整理中…",
+  "agent.stepRouter": "判断内容…",
+  "agent.stepExtract": "抽取记忆…",
+  "agent.stepMerge": "查找重复…",
+  "agent.stepRelations": "寻找关联…",
+  "review.title": "确认建议(应用前都可编辑)",
+  "review.nodes": "建议记忆",
+  "review.relations": "建议关联",
+  "review.create": "新建",
+  "review.merge": "并入「{title}」",
+  "review.reject": "忽略",
+  "review.addTag": "加标签后回车",
+  "review.importance": "重要度 {value}",
+  "review.cancel": "取消",
+  "review.apply": "应用 {count} 条",
 } as const;
 
 export type TranslationKey = keyof typeof en;

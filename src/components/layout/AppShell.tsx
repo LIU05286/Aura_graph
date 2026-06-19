@@ -7,6 +7,7 @@ import DesktopShell from "./DesktopShell";
 import MobileShell from "./MobileShell";
 import NodeFormModal from "../panels/NodeFormModal";
 import CommandPalette from "../panels/CommandPalette";
+import AiSettingsModal from "../panels/AiSettingsModal";
 
 /** 应用根:持久化 + 全局键盘 + 选择桌面 / 手机外壳 + 全局模态 */
 export default function AppShell() {
@@ -27,7 +28,6 @@ export default function AppShell() {
     [nodes, hiddenTypes, activeTags, timeWindow]
   );
 
-  // 仅在星图视图:选中的星若被筛选隐藏则取消选中(列表视图不受图筛选影响)
   useEffect(() => {
     if (currentView !== "graph") return;
     if (selectedNodeId && !visibleIds.has(selectedNodeId)) selectNode(null);
@@ -46,6 +46,7 @@ export default function AppShell() {
       {isMobile ? <MobileShell /> : <DesktopShell />}
       <NodeFormModal />
       <CommandPalette />
+      <AiSettingsModal />
     </div>
   );
 }
