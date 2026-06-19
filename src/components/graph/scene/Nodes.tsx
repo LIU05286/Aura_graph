@@ -3,7 +3,7 @@ import * as THREE from "three";
 import type { ThreeEvent } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import type { MemoryNode } from "../../../types/graph";
-import { TYPE_COLOR, importanceToRadius } from "../../../data/visualMappings";
+import { TYPE_COLOR, importanceToRadius, recencyFactor } from "../../../data/visualMappings";
 import NodeGlow from "./NodeGlow";
 
 interface NodesProps {
@@ -26,6 +26,7 @@ export default function Nodes({
   onFocus,
 }: NodesProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const now = Date.now();
 
   useEffect(() => {
     return () => {
@@ -47,11 +48,17 @@ export default function Nodes({
         const scale = radius * factor;
         const opacity = dimmed ? 0.12 : 1;
         const emphasized = isSel || isHover;
-        // 核心球颜色:类型色向白色提亮一点(和旧效果一致)
-        const coreColor = new THREE.Color(n.color ?? TYPE_COLOR[n.type]).lerp(
-          new THREE.Color(0xffffff),
-          0.25
-        );
+
+        // 时间近因:越新越亮;选中/悬停时不衰减,始终醒目。
+        const r = recencyFactor(n.createdAt, now);
+        const bright = emphasized ? 1 : 0.5 + 0.5 * r;
+
+        // 核心球颜色:类型色 → 提亮 → 旧星轻微偏冷 → 按近因调整整体亮度
+        const coreColor = new THREE.Color(n.color ?? TYPE_COLOR[n.type])
+          .lerp(new THREE.Color(0xffffff), 0.25)
+          .lerp(new THREE.Color(0x3b4a66), emphasized ? 0 : (1 - r) * 0.18)
+          .multiplyScalar(bright);
+
         const handleClick = (e: ThreeEvent<MouseEvent>) => {
           e.stopPropagation();
           onSelect(n.id);
@@ -59,7 +66,7 @@ export default function Nodes({
         };
         return (
           <group key={n.id}>
-            <NodeGlow node={n} emphasized={emphasized} dimmed={dimmed} />
+            <NodeGlow node={n} emphasized={emphasized} dimmed={dimmed} recency={r} />
             <mesh
               position={[n.x, n.y, n.z]}
               scale={scale}

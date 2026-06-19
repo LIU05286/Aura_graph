@@ -224,6 +224,8 @@ export const en = {
   "review.due": "待复盘({count})",
   "review.dueEmpty": "暂无待复盘的记忆",
   "review.markReviewed": "标记已复盘",
+  "timeline.thisMonth": "本月",
+  "timeline.last3": "近三月",
 } as const;
 
 export type TranslationKey = keyof typeof en;

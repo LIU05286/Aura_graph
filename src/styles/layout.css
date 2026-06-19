@@ -327,3 +327,15 @@
     display: none;
   }
 }
+
+/* 时间轴快捷按钮行 */
+.ag-timeline-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.ag-timeline-quick .ag-chip {
+  padding: 4px 12px;
+  font-size: var(--ag-fs-xs);
+}
