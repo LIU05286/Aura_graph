@@ -18,7 +18,7 @@ export const en = {
   "capture.placeholder": "记一个想法… 回车保存",
   // EmptyState
   "empty.title": "Your universe is empty",
-  "empty.hint": "Capture your first thought above — or explore the demo to see what's possible.",
+  "empty.hint": "从『今天』开始,记下你的第一条记忆吧",
   "empty.loadDemo": "Load demo",
   // AI tags (P4.2)
   "ai.suggestTags": "✦ Suggest tags (AI)",
@@ -101,6 +101,9 @@ export const en = {
   "io.exportJson": "Export JSON",
   "io.importJson": "Import JSON",
   "io.reset": "Load demo",
+  "empty.cta": "去记录第一条",
+  "io.clear": "清空当前星系",
+  "io.confirmClear": "确定清空当前星系的全部记忆?此操作不可撤销(建议先导出 JSON 备份)。",
   // NodeFormModal
   "form.titleRequired": "Title cannot be empty",
   "form.createTitle": "New node",

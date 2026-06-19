@@ -75,6 +75,7 @@ export interface GraphState {
   pushQaTurn: (turn: QaTurn) => void;
   clearQaThread: () => void;
   replaceGraph: (graph: AuraGraph) => void;
+  clearGraph: () => void;
   resetToSeed: () => void;
 
   // —— actions:多星系 ——
@@ -185,6 +186,9 @@ export const useGraphStore = create<GraphState>((set, get) => ({
       selectedNodeId: null,
       timeWindow: null,
     }),
+
+  clearGraph: () =>
+    set({ nodes: [], edges: [], selectedNodeId: null, timeWindow: null }),
 
   resetToSeed: () => {
     const fresh = createSeedGraph();

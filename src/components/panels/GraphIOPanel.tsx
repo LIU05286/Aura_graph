@@ -8,7 +8,7 @@ export default function GraphIOPanel() {
   const nodes = useGraphStore((s) => s.nodes);
   const edges = useGraphStore((s) => s.edges);
   const replaceGraph = useGraphStore((s) => s.replaceGraph);
-  const resetToSeed = useGraphStore((s) => s.resetToSeed);
+  const clearGraph = useGraphStore((s) => s.clearGraph);
 
   const onExport = () => {
     exportGraphToFile({ nodes, edges });
@@ -46,8 +46,8 @@ export default function GraphIOPanel() {
   };
 
   const onReset = () => {
-    if (window.confirm(t("io.confirmReset"))) {
-      resetToSeed();
+    if (window.confirm(t("io.confirmClear"))) {
+      clearGraph();
     }
   };
 
@@ -62,7 +62,7 @@ export default function GraphIOPanel() {
           {t("io.importJson")}
         </button>
         <button type="button" className="ag-chip" onClick={onReset}>
-          {t("io.reset")}
+          {t("io.clear")}
         </button>
       </div>
       <input
