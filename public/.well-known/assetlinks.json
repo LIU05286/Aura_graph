@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.auragraph.twa",
+        "sha256_cert_fingerprints": ["82:6D:C6:29:FD:BD:ED:95:79:A6:E9:A4:B8:D5:92:15:AF:B8:A5:AE:35:55:EF:75:79:89:16:34:E5:69:6C:2D"]
+      }
+    }]
