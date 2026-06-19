@@ -366,3 +366,7 @@
 .sheet-body .ag-right {
   padding-top: 10px;
 }
+/* 控制面板:内容整体下移,避开右上角收起按钮,消除重叠 */
+.ag-left {
+  padding-top: 46px;
+}

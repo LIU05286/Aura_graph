@@ -234,7 +234,11 @@ export const useGraphStore = create<GraphState>((set, get) => ({
     };
     await putGalaxy(galaxy);
     await saveGraphById(galaxy.id, { nodes: [], edges: [] });
-    set((s) => ({ galaxies: [...s.galaxies, galaxy] }));
+    set((s) =>
+      s.galaxies.some((g) => g.id === galaxy.id)
+        ? s
+        : { galaxies: [...s.galaxies, galaxy] }
+    );
     // 切到新星系;usePersistence 监听 activeGalaxyId 变化,会把当前图写回旧星系并载入新星系(空图)
     set({ activeGalaxyId: galaxy.id });
   },

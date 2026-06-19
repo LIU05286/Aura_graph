@@ -134,3 +134,9 @@
 .memory-day:first-child {
   margin-top: 0;
 }
+.settings-note {
+  font-size: var(--ag-fs-sm);
+  color: var(--ag-text-subtle);
+  line-height: var(--ag-lh-relaxed);
+  margin: 6px 0 0;
+}

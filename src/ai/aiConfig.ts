@@ -72,14 +72,14 @@ export function saveAiConfig(config: AiConfig): void {
   emit();
 }
 
-/** chat 端点是否可用(地址 + key 都非空) */
-export function isChatConfigured(config: AiConfig = loadAiConfig()): boolean {
-  return config.chat.baseUrl !== "" && config.chat.apiKey !== "";
+/** key 由服务器托管,前端始终视为已配置 */
+export function isChatConfigured(): boolean {
+  return true;
 }
 
-/** embeddings 端点是否可用 */
-export function isEmbeddingsConfigured(config: AiConfig = loadAiConfig()): boolean {
-  return config.embeddings.baseUrl !== "" && config.embeddings.apiKey !== "";
+/** key 由服务器托管,前端始终视为已配置 */
+export function isEmbeddingsConfigured(): boolean {
+  return true;
 }
 
 /** 去掉 base 尾部斜杠、path 头部斜杠后拼接,避免出现 // 或缺斜杠 */

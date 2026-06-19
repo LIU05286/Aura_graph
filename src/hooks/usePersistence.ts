@@ -7,8 +7,8 @@ import {
   loadGraphById,
   saveGraphById,
   putGalaxy,
+  DEFAULT_GALAXY_ID,
 } from "../data/graphRepository";
-import { DEFAULT_GALAXY_ID } from "../data/db";
 
 /**
  * 持久化:

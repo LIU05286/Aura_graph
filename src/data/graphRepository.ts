@@ -1,51 +1,103 @@
-import { db, DEFAULT_GALAXY_ID } from "./db";
 import type { AuraGraph, Galaxy } from "../types/graph";
+import { apiGetData, apiPutData, type ServerDoc } from "../api/client";
 
-/** 读当前激活星系 id(没有则回退默认) */
+export const DEFAULT_GALAXY_ID = "galaxy-default";
+
+// 内存缓存整份服务器文档;读走缓存副本,写改缓存后整份 PUT 回服务器。
+let cache: ServerDoc | null = null;
+let loading: Promise<ServerDoc> | null = null;
+
+/** 按 id 去重,保留首次出现 —— 自愈历史上写入的重复星系 */
+function dedupeById(galaxies: Galaxy[]): Galaxy[] {
+  const seen = new Set<string>();
+  const out: Galaxy[] = [];
+  for (const g of galaxies) {
+    if (g && typeof g.id === "string" && !seen.has(g.id)) {
+      seen.add(g.id);
+      out.push(g);
+    }
+  }
+  return out;
+}
+
+function normalize(d: Partial<ServerDoc> | null | undefined): ServerDoc {
+  const galaxies = Array.isArray(d?.galaxies) ? (d!.galaxies as Galaxy[]) : [];
+  return {
+    galaxies: dedupeById(galaxies),
+    activeGalaxyId: typeof d?.activeGalaxyId === "string" ? d!.activeGalaxyId : null,
+    graphs:
+      d?.graphs && typeof d.graphs === "object"
+        ? (d!.graphs as Record<string, AuraGraph>)
+        : {},
+  };
+}
+
+async function ensureDoc(): Promise<ServerDoc> {
+  if (cache) return cache;
+  if (!loading) {
+    loading = apiGetData()
+      .then(async (d) => {
+        const before = Array.isArray(d?.galaxies) ? d.galaxies.length : 0;
+        cache = normalize(d);
+        // 去重后数量变了,说明服务器有历史重复,顺手写回一份干净数据(自愈)
+        if (cache.galaxies.length !== before) {
+          await apiPutData(cache);
+        }
+        return cache;
+      })
+      .catch((e) => {
+        loading = null; // 失败可重试
+        throw e;
+      });
+  }
+  return loading;
+}
+
+async function flush(): Promise<void> {
+  if (cache) await apiPutData(cache);
+}
+
 export async function getActiveGalaxyId(): Promise<string> {
-  const row = await db.meta.get("activeGalaxyId");
-  return row?.value ?? DEFAULT_GALAXY_ID;
+  const doc = await ensureDoc();
+  return doc.activeGalaxyId ?? DEFAULT_GALAXY_ID;
 }
-
-/** 设置当前激活星系 id */
 export async function setActiveGalaxyId(id: string): Promise<void> {
-  await db.meta.put({ key: "activeGalaxyId", value: id });
+  const doc = await ensureDoc();
+  doc.activeGalaxyId = id;
+  await flush();
 }
-
-/** 读所有星系元信息 */
+/** 返回副本:避免调用方(store / usePersistence)与内部缓存共享同一数组而互相污染 */
 export async function listGalaxies(): Promise<Galaxy[]> {
-  return db.galaxies.toArray();
+  const doc = await ensureDoc();
+  return doc.galaxies.map((g) => ({ ...g }));
 }
-
-/** 新增/更新一个星系元信息 */
 export async function putGalaxy(galaxy: Galaxy): Promise<void> {
-  await db.galaxies.put(galaxy);
+  const doc = await ensureDoc();
+  const i = doc.galaxies.findIndex((g) => g.id === galaxy.id);
+  if (i >= 0) doc.galaxies[i] = galaxy;
+  else doc.galaxies.push(galaxy);
+  await flush();
 }
-
-/** 删除一个星系及其图数据 */
 export async function deleteGalaxy(id: string): Promise<void> {
-  await db.galaxies.delete(id);
-  await db.galaxyGraphs.delete(id);
+  const doc = await ensureDoc();
+  doc.galaxies = doc.galaxies.filter((g) => g.id !== id);
+  delete doc.graphs[id];
+  await flush();
 }
-
-/** 读指定星系的图数据 */
 export async function loadGraphById(galaxyId: string): Promise<AuraGraph | null> {
-  const row = await db.galaxyGraphs.get(galaxyId);
-  if (!row) return null;
-  return { nodes: row.nodes, edges: row.edges };
+  const doc = await ensureDoc();
+  const g = doc.graphs[galaxyId];
+  return g ? { nodes: [...g.nodes], edges: [...g.edges] } : null;
 }
-
-/** 写指定星系的图数据 */
 export async function saveGraphById(galaxyId: string, graph: AuraGraph): Promise<void> {
-  await db.galaxyGraphs.put({ galaxyId, nodes: graph.nodes, edges: graph.edges });
+  const doc = await ensureDoc();
+  doc.graphs[galaxyId] = { nodes: graph.nodes, edges: graph.edges };
+  await flush();
 }
-
-/** —— 向后兼容:操作"当前激活星系" —— */
 export async function loadGraph(): Promise<AuraGraph | null> {
   const id = await getActiveGalaxyId();
   return loadGraphById(id);
 }
-
 export async function saveGraph(graph: AuraGraph): Promise<void> {
   const id = await getActiveGalaxyId();
   await saveGraphById(id, graph);

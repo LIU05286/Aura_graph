@@ -1,7 +1,6 @@
 import { useState } from "react";
 import GraphCanvas from "../components/graph/GraphCanvas";
 import EmptyState from "../components/panels/EmptyState";
-import QuickCapture from "../components/panels/QuickCapture";
 import ControlPanel from "../components/panels/ControlPanel";
 import BottomSheet from "../components/ui/BottomSheet";
 import { useIsMobile } from "../hooks/useIsMobile";
@@ -17,12 +16,7 @@ export default function GraphView() {
       <GraphCanvas />
       <EmptyState />
 
-      {!isMobile && (
-        <>
-          <QuickCapture />
-          <ControlPanel />
-        </>
-      )}
+      {!isMobile && <ControlPanel />}
 
       {isMobile && (
         <>
@@ -38,7 +32,6 @@ export default function GraphView() {
             onClose={() => setControlsOpen(false)}
             title={t("graph.controlsTitle")}
           >
-            <QuickCapture />
             <ControlPanel />
           </BottomSheet>
         </>

@@ -56,11 +56,11 @@ export const EDGE_COLOR_DIM = "#6a80ad";
 export const EDGE_COLOR_HOT = "#bfe0ff";
 
 export const EDGE_TYPE_LABEL: Record<MemoryEdgeType, string> = {
-  related: "Related",
-  causes: "Causes",
-  supports: "Supports",
-  contradicts: "Contradicts",
-  source: "Source",
-  similar: "Similar",
-  extends: "Extends",
+  related: "关联",
+  causes: "导致",
+  supports: "支持",
+  contradicts: "反驳",
+  source: "来源",
+  similar: "相似",
+  extends: "延伸",
 };
