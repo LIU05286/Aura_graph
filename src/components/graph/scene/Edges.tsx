@@ -46,7 +46,7 @@ export default function Edges({ nodes, edges, visibleIds, selectedNodeId }: Edge
       <lineBasicMaterial
         vertexColors
         transparent
-        opacity={0.5}
+        opacity={0.62}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />

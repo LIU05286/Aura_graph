@@ -52,8 +52,8 @@ export function recencyFactor(createdAtIso: string, nowMs: number = Date.now()):
 }
 
 /** 边的配色:普通 / 高亮(连接到选中节点) */
-export const EDGE_COLOR_DIM = "#33415a";
-export const EDGE_COLOR_HOT = "#9fd0ff";
+export const EDGE_COLOR_DIM = "#6a80ad";
+export const EDGE_COLOR_HOT = "#bfe0ff";
 
 export const EDGE_TYPE_LABEL: Record<MemoryEdgeType, string> = {
   related: "Related",

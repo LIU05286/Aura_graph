@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
+import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import type { MemoryNode, MemoryEdge } from "../../../types/graph";
 import CameraRig from "./CameraRig";
@@ -61,11 +62,19 @@ export default function StarScene(props: StarSceneProps) {
         />
         <OrbitControls
           ref={controlsRef}
-          enablePan={false}
+          enablePan
+          screenSpacePanning
+          panSpeed={0.8}
           minDistance={6}
           maxDistance={120}
           rotateSpeed={0.6}
           zoomSpeed={0.8}
+          touches={{ ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN }}
+          mouseButtons={{
+            LEFT: THREE.MOUSE.ROTATE,
+            MIDDLE: THREE.MOUSE.DOLLY,
+            RIGHT: THREE.MOUSE.PAN,
+          }}
         />
         <CameraRig
           controlsRef={controlsRef}

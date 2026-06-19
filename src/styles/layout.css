@@ -361,3 +361,8 @@
 .onboard-dot.is-active { background: var(--ag-accent-bright); }
 .onboard-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .onboard-right { display: flex; gap: 8px; }
+/* 详情头部类型圆点(带发光)不被滚动容器顶边裁切 */
+.ds-inspector .ag-right,
+.sheet-body .ag-right {
+  padding-top: 10px;
+}
